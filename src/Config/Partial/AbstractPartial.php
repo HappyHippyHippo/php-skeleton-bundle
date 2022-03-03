@@ -7,6 +7,9 @@ use RuntimeException;
 
 abstract class AbstractPartial extends Model implements PartialInterface
 {
+    /** @var string  */
+    protected const ENV_PREFIX = 'HIPPY.';
+
     /** @var array<int|string, mixed> */
     protected array $config = [];
 
@@ -139,7 +142,7 @@ abstract class AbstractPartial extends Model implements PartialInterface
      */
     protected function parseBool(array $config, string $path, ?bool $default = null): ?bool
     {
-        $env = str_replace('.', '_', strtoupper('Hippy.' . $path));
+        $env = str_replace('.', '_', strtoupper(self::ENV_PREFIX . $path));
         if ($envValue = getenv($env)) {
             return 'true' === $envValue || '1' === $envValue;
         }
@@ -160,7 +163,7 @@ abstract class AbstractPartial extends Model implements PartialInterface
      */
     protected function parseInt(array $config, string $path, ?int $default = null): ?int
     {
-        $env = str_replace('.', '_', strtoupper('Hippy.' . $path));
+        $env = str_replace('.', '_', strtoupper(self::ENV_PREFIX . $path));
         if ($envValue = getenv($env)) {
             return (int) $envValue;
         }
@@ -181,7 +184,7 @@ abstract class AbstractPartial extends Model implements PartialInterface
      */
     protected function parseString(array $config, string $path, ?string $default = null): ?string
     {
-        $env = str_replace('.', '_', strtoupper('Hippy.' . $path));
+        $env = str_replace('.', '_', strtoupper(self::ENV_PREFIX . $path));
         if ($envValue = getenv($env)) {
             return $envValue;
         }
@@ -202,7 +205,7 @@ abstract class AbstractPartial extends Model implements PartialInterface
      */
     protected function parseArray(array $config, string $path, ?array $default = null): ?array
     {
-        $env = str_replace('.', '_', strtoupper('Hippy.' . $path));
+        $env = str_replace('.', '_', strtoupper(self::ENV_PREFIX . $path));
         if ($envValue = getenv($env)) {
             return explode(',', $envValue);
         }

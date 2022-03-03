@@ -1,12 +1,12 @@
 <?php
 
-namespace HHH\Tests\Unit\Error;
+namespace Hippy\Tests\Unit\Error;
 
-use HHH\Error\Error;
+use Hippy\Error\Error;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Yaml;
 
-/** @coversDefaultClass \HHH\Error\Error */
+/** @coversDefaultClass \Hippy\Error\Error */
 class ErrorTest extends TestCase
 {
     /**

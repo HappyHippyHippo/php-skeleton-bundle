@@ -1,10 +1,10 @@
 <?php
 
-namespace HHH\Tests\Unit\Command\Quality;
+namespace Hippy\Tests\Unit\Command\Quality;
 
-use HHH\Command\Quality\Config\PhpCodeBeautifierServiceConfig;
-use HHH\Command\Quality\PhpCodeBeautifierCommand;
-use HHH\Command\Quality\Service\PhpCodeBeautifierService;
+use Hippy\Command\Quality\Config\PhpCodeBeautifierServiceConfig;
+use Hippy\Command\Quality\PhpCodeBeautifierCommand;
+use Hippy\Command\Quality\Service\PhpCodeBeautifierService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
@@ -14,7 +14,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-/** @coversDefaultClass \HHH\Command\Quality\PhpCodeBeautifierCommand */
+/** @coversDefaultClass \Hippy\Command\Quality\PhpCodeBeautifierCommand */
 class PhpCodeBeautifierCommandTest extends TestCase
 {
     /** @var PhpCodeBeautifierService&MockObject */

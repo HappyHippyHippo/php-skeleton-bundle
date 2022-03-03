@@ -1,10 +1,10 @@
 <?php
 
-namespace HHH\Tests\Unit\Model;
+namespace Hippy\Tests\Unit\Model;
 
 use DateTime;
-use HHH\Model\Model;
-use HHH\Model\ModelInterface;
+use Hippy\Model\Model;
+use Hippy\Model\ModelInterface;
 use Exception;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
@@ -12,7 +12,7 @@ use ReflectionException;
 use ReflectionMethod;
 use ReflectionProperty;
 
-/** @coversDefaultClass \HHH\Model\Model */
+/** @coversDefaultClass \Hippy\Model\Model */
 class ModelTest extends TestCase
 {
     /**

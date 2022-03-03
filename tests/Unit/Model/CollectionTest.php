@@ -1,16 +1,16 @@
 <?php
 
-namespace HHH\Tests\Unit\Model;
+namespace Hippy\Tests\Unit\Model;
 
 use ArrayIterator;
-use HHH\Model\Collection;
-use HHH\Model\CollectionInterface;
-use HHH\Model\ModelInterface;
+use Hippy\Model\Collection;
+use Hippy\Model\CollectionInterface;
+use Hippy\Model\ModelInterface;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 
-/** @coversDefaultClass \HHH\Model\Collection */
+/** @coversDefaultClass \Hippy\Model\Collection */
 class CollectionTest extends TestCase
 {
     /**

@@ -1,18 +1,18 @@
 <?php
 
-namespace HHH\Tests\Unit\Command\Quality;
+namespace Hippy\Tests\Unit\Command\Quality;
 
-use HHH\Command\Quality\AllCommand;
-use HHH\Command\Quality\Config\PhpCodeBeautifierServiceConfig;
-use HHH\Command\Quality\Config\PhpCodeSnifferServiceConfig;
-use HHH\Command\Quality\Config\PhpCodeStandardFixerServiceConfig;
-use HHH\Command\Quality\Config\PhpStanServiceConfig;
-use HHH\Command\Quality\Config\PhpUnitServiceConfig;
-use HHH\Command\Quality\Service\PhpCodeBeautifierService;
-use HHH\Command\Quality\Service\PhpCodeSnifferService;
-use HHH\Command\Quality\Service\PhpCodeStandardFixerService;
-use HHH\Command\Quality\Service\PhpStanService;
-use HHH\Command\Quality\Service\PhpUnitService;
+use Hippy\Command\Quality\AllCommand;
+use Hippy\Command\Quality\Config\PhpCodeBeautifierServiceConfig;
+use Hippy\Command\Quality\Config\PhpCodeSnifferServiceConfig;
+use Hippy\Command\Quality\Config\PhpCodeStandardFixerServiceConfig;
+use Hippy\Command\Quality\Config\PhpStanServiceConfig;
+use Hippy\Command\Quality\Config\PhpUnitServiceConfig;
+use Hippy\Command\Quality\Service\PhpCodeBeautifierService;
+use Hippy\Command\Quality\Service\PhpCodeSnifferService;
+use Hippy\Command\Quality\Service\PhpCodeStandardFixerService;
+use Hippy\Command\Quality\Service\PhpStanService;
+use Hippy\Command\Quality\Service\PhpUnitService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
@@ -22,7 +22,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-/** @coversDefaultClass \HHH\Command\Quality\AllCommand */
+/** @coversDefaultClass \Hippy\Command\Quality\AllCommand */
 class AllCommandTest extends TestCase
 {
     /** @var PhpCodeBeautifierService&MockObject */

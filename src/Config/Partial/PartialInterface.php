@@ -1,8 +1,8 @@
 <?php
 
-namespace HHH\Config\Partial;
+namespace Hippy\Config\Partial;
 
-use HHH\Model\ModelInterface;
+use Hippy\Model\ModelInterface;
 
 interface PartialInterface extends ModelInterface
 {

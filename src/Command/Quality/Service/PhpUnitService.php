@@ -1,10 +1,10 @@
 <?php
 
-namespace HHH\Command\Quality\Service;
+namespace Hippy\Command\Quality\Service;
 
-use HHH\Command\CommandException;
-use HHH\Command\Quality\Config\PhpUnitServiceConfig;
-use HHH\Config\ConfigInterface;
+use Hippy\Command\CommandException;
+use Hippy\Command\Quality\Config\PhpUnitServiceConfig;
+use Hippy\Config\ConfigInterface;
 use Symfony\Component\Console\Command\Command;
 
 class PhpUnitService extends AbstractService

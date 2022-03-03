@@ -1,15 +1,15 @@
 <?php
 
-namespace HHH\Tests\Unit\Command\Quality\Service;
+namespace Hippy\Tests\Unit\Command\Quality\Service;
 
-use HHH\Command\CommandException;
-use HHH\Command\Quality\Service\AbstractService;
+use Hippy\Command\CommandException;
+use Hippy\Command\Quality\Service\AbstractService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 use ReflectionMethod;
 
-/** @coversDefaultClass \HHH\Command\Quality\Service\AbstractService */
+/** @coversDefaultClass \Hippy\Command\Quality\Service\AbstractService */
 class AbstractServiceTest extends TestCase
 {
     /** @var AbstractService&MockObject */

@@ -1,12 +1,12 @@
 <?php
 
-namespace HHH\Tests\Unit\Error;
+namespace Hippy\Tests\Unit\Error;
 
-use HHH\Error\ExceptionError;
+use Hippy\Error\ExceptionError;
 use Exception;
 use PHPUnit\Framework\TestCase;
 
-/** @coversDefaultClass \HHH\Error\ExceptionError */
+/** @coversDefaultClass \Hippy\Error\ExceptionError */
 class ExceptionErrorTest extends TestCase
 {
     /**

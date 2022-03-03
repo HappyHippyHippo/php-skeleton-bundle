@@ -1,11 +1,11 @@
 <?php
 
-namespace HHH\Tests\Unit\Command\Quality\Config;
+namespace Hippy\Tests\Unit\Command\Quality\Config;
 
-use HHH\Command\Quality\Config\PhpCodeSnifferServiceConfig;
+use Hippy\Command\Quality\Config\PhpCodeSnifferServiceConfig;
 use PHPUnit\Framework\TestCase;
 
-/** @coversDefaultClass \HHH\Command\Quality\Config\PhpCodeSnifferServiceConfig */
+/** @coversDefaultClass \Hippy\Command\Quality\Config\PhpCodeSnifferServiceConfig */
 class PhpCodeSnifferServiceConfigTest extends TestCase
 {
     /**

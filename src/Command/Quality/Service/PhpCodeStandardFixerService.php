@@ -1,10 +1,10 @@
 <?php
 
-namespace HHH\Command\Quality\Service;
+namespace Hippy\Command\Quality\Service;
 
-use HHH\Command\CommandException;
-use HHH\Command\Quality\Config\PhpCodeStandardFixerServiceConfig;
-use HHH\Config\ConfigInterface;
+use Hippy\Command\CommandException;
+use Hippy\Command\Quality\Config\PhpCodeStandardFixerServiceConfig;
+use Hippy\Config\ConfigInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 

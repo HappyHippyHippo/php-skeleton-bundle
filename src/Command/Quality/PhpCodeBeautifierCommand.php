@@ -1,9 +1,9 @@
 <?php
 
-namespace HHH\Command\Quality;
+namespace Hippy\Command\Quality;
 
-use HHH\Command\Quality\Config\PhpCodeBeautifierServiceConfig;
-use HHH\Command\Quality\Service\PhpCodeBeautifierService;
+use Hippy\Command\Quality\Config\PhpCodeBeautifierServiceConfig;
+use Hippy\Command\Quality\Service\PhpCodeBeautifierService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

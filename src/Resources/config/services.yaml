@@ -7,10 +7,10 @@ services:
     public: false
 
   _instanceof:
-    HHH\Config\Partial\PartialInterface:
-      tags: [HHH.config.partial]
+    Hippy\Config\Partial\PartialInterface:
+      tags: [Hippy.config.partial]
 
-  HHH\:
+  Hippy\:
     resource: '../../'
     exclude:
       - '../../DependencyInjection/'
@@ -18,8 +18,8 @@ services:
       - '../../Kernel.php'
       - '../tests/'
 
-  HHH\Config\Config:
+  Hippy\Config\Config:
     arguments:
-      $partials: !tagged_iterator HHH.config.partial
+      $partials: !tagged_iterator Hippy.config.partial
       $root: '%kernel.project_dir%'
       $config: []

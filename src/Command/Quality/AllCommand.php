@@ -1,17 +1,17 @@
 <?php
 
-namespace HHH\Command\Quality;
+namespace Hippy\Command\Quality;
 
-use HHH\Command\Quality\Config\PhpCodeBeautifierServiceConfig;
-use HHH\Command\Quality\Config\PhpCodeStandardFixerServiceConfig;
-use HHH\Command\Quality\Config\PhpCodeSnifferServiceConfig;
-use HHH\Command\Quality\Config\PhpStanServiceConfig;
-use HHH\Command\Quality\Config\PhpUnitServiceConfig;
-use HHH\Command\Quality\Service\PhpCodeBeautifierService;
-use HHH\Command\Quality\Service\PhpCodeStandardFixerService;
-use HHH\Command\Quality\Service\PhpCodeSnifferService;
-use HHH\Command\Quality\Service\PhpStanService;
-use HHH\Command\Quality\Service\PhpUnitService;
+use Hippy\Command\Quality\Config\PhpCodeBeautifierServiceConfig;
+use Hippy\Command\Quality\Config\PhpCodeStandardFixerServiceConfig;
+use Hippy\Command\Quality\Config\PhpCodeSnifferServiceConfig;
+use Hippy\Command\Quality\Config\PhpStanServiceConfig;
+use Hippy\Command\Quality\Config\PhpUnitServiceConfig;
+use Hippy\Command\Quality\Service\PhpCodeBeautifierService;
+use Hippy\Command\Quality\Service\PhpCodeStandardFixerService;
+use Hippy\Command\Quality\Service\PhpCodeSnifferService;
+use Hippy\Command\Quality\Service\PhpStanService;
+use Hippy\Command\Quality\Service\PhpUnitService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

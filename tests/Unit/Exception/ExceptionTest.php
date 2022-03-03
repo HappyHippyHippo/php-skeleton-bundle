@@ -1,16 +1,16 @@
 <?php
 
-namespace HHH\Tests\Unit\Exception;
+namespace Hippy\Tests\Unit\Exception;
 
-use HHH\Error\Error;
-use HHH\Error\ErrorCollection;
-use HHH\Exception\Exception;
-use HHH\Model\ModelInterface;
+use Hippy\Error\Error;
+use Hippy\Error\ErrorCollection;
+use Hippy\Exception\Exception;
+use Hippy\Model\ModelInterface;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use Symfony\Component\HttpFoundation\Response;
 
-/** @coversDefaultClass \HHH\Exception\Exception */
+/** @coversDefaultClass \Hippy\Exception\Exception */
 class ExceptionTest extends TestCase
 {
     /**

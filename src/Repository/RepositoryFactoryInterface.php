@@ -1,6 +1,6 @@
 <?php
 
-namespace HHH\Repository;
+namespace Hippy\Repository;
 
 interface RepositoryFactoryInterface
 {

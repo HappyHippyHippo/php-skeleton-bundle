@@ -1,13 +1,13 @@
 <?php
 
-namespace HHH\Tests\Unit\Config\Partial;
+namespace Hippy\Tests\Unit\Config\Partial;
 
-use HHH\Config\Partial\AbstractPartial;
+use Hippy\Config\Partial\AbstractPartial;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use RuntimeException;
 
-/** @coversDefaultClass \HHH\Config\Partial\AbstractPartial */
+/** @coversDefaultClass \Hippy\Config\Partial\AbstractPartial */
 class AbstractPartialTest extends TestCase
 {
     /**

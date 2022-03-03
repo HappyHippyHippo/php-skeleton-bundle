@@ -1,8 +1,8 @@
 <?php
 
-namespace HHH\Config;
+namespace Hippy\Config;
 
-use HHH\Model\ModelInterface;
+use Hippy\Model\ModelInterface;
 
 interface ConfigInterface extends ModelInterface
 {

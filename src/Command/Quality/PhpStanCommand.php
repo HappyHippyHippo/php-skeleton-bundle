@@ -1,9 +1,9 @@
 <?php
 
-namespace HHH\Command\Quality;
+namespace Hippy\Command\Quality;
 
-use HHH\Command\Quality\Config\PhpStanServiceConfig;
-use HHH\Command\Quality\Service\PhpStanService;
+use Hippy\Command\Quality\Config\PhpStanServiceConfig;
+use Hippy\Command\Quality\Service\PhpStanService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

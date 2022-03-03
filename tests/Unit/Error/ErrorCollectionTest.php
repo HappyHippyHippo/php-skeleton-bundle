@@ -1,16 +1,16 @@
 <?php
 
-namespace HHH\Tests\Unit\Error;
+namespace Hippy\Tests\Unit\Error;
 
-use HHH\Error\Error;
-use HHH\Error\ErrorCollection;
-use HHH\Error\ErrorInterface;
-use HHH\Model\ModelInterface;
+use Hippy\Error\Error;
+use Hippy\Error\ErrorCollection;
+use Hippy\Error\ErrorInterface;
+use Hippy\Model\ModelInterface;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 
-/** @coversDefaultClass \HHH\Error\ErrorCollection */
+/** @coversDefaultClass \Hippy\Error\ErrorCollection */
 class ErrorCollectionTest extends TestCase
 {
     /**

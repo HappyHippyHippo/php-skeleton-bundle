@@ -1,6 +1,6 @@
 <?php
 
-namespace HHH\Command\Quality\Config;
+namespace Hippy\Command\Quality\Config;
 
 class PhpCodeBeautifierServiceConfig
 {

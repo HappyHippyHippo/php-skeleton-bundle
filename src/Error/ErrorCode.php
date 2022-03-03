@@ -1,6 +1,6 @@
 <?php
 
-namespace HHH\Error;
+namespace Hippy\Error;
 
 abstract class ErrorCode
 {

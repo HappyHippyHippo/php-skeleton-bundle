@@ -1,12 +1,12 @@
 <?php
 
-namespace HHH\Tests\Unit\Model;
+namespace Hippy\Tests\Unit\Model;
 
-use HHH\Error\ErrorCollection;
-use HHH\Model\EnvelopeStatus;
+use Hippy\Error\ErrorCollection;
+use Hippy\Model\EnvelopeStatus;
 use PHPUnit\Framework\TestCase;
 
-/** @coversDefaultClass \HHH\Model\EnvelopeStatus */
+/** @coversDefaultClass \Hippy\Model\EnvelopeStatus */
 class EnvelopeStatusTest extends TestCase
 {
     /**

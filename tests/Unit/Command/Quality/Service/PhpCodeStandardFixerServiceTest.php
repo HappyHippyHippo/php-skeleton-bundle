@@ -1,18 +1,18 @@
 <?php
 
-namespace HHH\Tests\Unit\Command\Quality\Service;
+namespace Hippy\Tests\Unit\Command\Quality\Service;
 
-use HHH\Command\CommandException;
-use HHH\Command\Quality\Config\PhpCodeStandardFixerServiceConfig;
-use HHH\Command\Quality\Service\PhpCodeStandardFixerService;
-use HHH\Config\ConfigInterface;
+use Hippy\Command\CommandException;
+use Hippy\Command\Quality\Config\PhpCodeStandardFixerServiceConfig;
+use Hippy\Command\Quality\Service\PhpCodeStandardFixerService;
+use Hippy\Config\ConfigInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-/** @coversDefaultClass \HHH\Command\Quality\Service\PhpCodeStandardFixerService */
+/** @coversDefaultClass \Hippy\Command\Quality\Service\PhpCodeStandardFixerService */
 class PhpCodeStandardFixerServiceTest extends TestCase
 {
     /** @var string */

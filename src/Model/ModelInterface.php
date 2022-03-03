@@ -1,6 +1,6 @@
 <?php
 
-namespace HHH\Model;
+namespace Hippy\Model;
 
 use JsonSerializable;
 

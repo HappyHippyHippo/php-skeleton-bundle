@@ -1,9 +1,9 @@
 <?php
 
-namespace HHH\Command\Quality;
+namespace Hippy\Command\Quality;
 
-use HHH\Command\Quality\Config\PhpCodeStandardFixerServiceConfig;
-use HHH\Command\Quality\Service\PhpCodeStandardFixerService;
+use Hippy\Command\Quality\Config\PhpCodeStandardFixerServiceConfig;
+use Hippy\Command\Quality\Service\PhpCodeStandardFixerService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

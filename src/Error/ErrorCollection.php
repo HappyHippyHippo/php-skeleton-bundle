@@ -1,9 +1,9 @@
 <?php
 
-namespace HHH\Error;
+namespace Hippy\Error;
 
-use HHH\Model\Collection;
-use HHH\Model\ModelInterface;
+use Hippy\Model\Collection;
+use Hippy\Model\ModelInterface;
 use InvalidArgumentException;
 
 class ErrorCollection extends Collection

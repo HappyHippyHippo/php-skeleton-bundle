@@ -1,12 +1,12 @@
 <?php
 
-namespace HHH\Tests\Unit\Config;
+namespace Hippy\Tests\Unit\Config;
 
-use HHH\Config\Config;
-use HHH\Config\Partial\PartialInterface;
+use Hippy\Config\Config;
+use Hippy\Config\Partial\PartialInterface;
 use PHPUnit\Framework\TestCase;
 
-/** @coversDefaultClass \HHH\Config\Config */
+/** @coversDefaultClass \Hippy\Config\Config */
 class ConfigTest extends TestCase
 {
     /**

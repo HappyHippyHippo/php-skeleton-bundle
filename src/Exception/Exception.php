@@ -1,10 +1,10 @@
 <?php
 
-namespace HHH\Exception;
+namespace Hippy\Exception;
 
-use HHH\Error\ErrorCollection;
-use HHH\Error\ErrorInterface;
-use HHH\Model\ModelInterface;
+use Hippy\Error\ErrorCollection;
+use Hippy\Error\ErrorInterface;
+use Hippy\Model\ModelInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;

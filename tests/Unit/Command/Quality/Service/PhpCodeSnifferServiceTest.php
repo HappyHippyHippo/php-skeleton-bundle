@@ -1,18 +1,18 @@
 <?php
 
-namespace HHH\Tests\Unit\Command\Quality\Service;
+namespace Hippy\Tests\Unit\Command\Quality\Service;
 
-use HHH\Command\CommandException;
-use HHH\Command\Quality\Config\PhpCodeSnifferServiceConfig;
-use HHH\Command\Quality\Service\PhpCodeSnifferService;
-use HHH\Config\ConfigInterface;
+use Hippy\Command\CommandException;
+use Hippy\Command\Quality\Config\PhpCodeSnifferServiceConfig;
+use Hippy\Command\Quality\Service\PhpCodeSnifferService;
+use Hippy\Config\ConfigInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-/** @coversDefaultClass \HHH\Command\Quality\Service\PhpCodeSnifferService */
+/** @coversDefaultClass \Hippy\Command\Quality\Service\PhpCodeSnifferService */
 class PhpCodeSnifferServiceTest extends TestCase
 {
     /** @var string */

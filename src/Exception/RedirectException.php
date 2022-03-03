@@ -1,6 +1,6 @@
 <?php
 
-namespace HHH\Exception;
+namespace Hippy\Exception;
 
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;

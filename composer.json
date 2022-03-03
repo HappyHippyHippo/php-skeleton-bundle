@@ -33,12 +33,12 @@
     },
     "autoload": {
         "psr-4": {
-            "HHH\\": "src/"
+            "Hippy\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "HHH\\Tests\\": "tests/"
+            "Hippy\\Tests\\": "tests/"
         }
     },
     "scripts": {

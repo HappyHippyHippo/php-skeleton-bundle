@@ -1,8 +1,8 @@
 <?php
 
-namespace HHH\Command\Quality\Service;
+namespace Hippy\Command\Quality\Service;
 
-use HHH\Command\CommandException;
+use Hippy\Command\CommandException;
 
 abstract class AbstractService
 {

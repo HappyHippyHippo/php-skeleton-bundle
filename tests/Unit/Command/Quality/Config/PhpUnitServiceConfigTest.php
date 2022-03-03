@@ -1,11 +1,11 @@
 <?php
 
-namespace HHH\Tests\Unit\Command\Quality\Config;
+namespace Hippy\Tests\Unit\Command\Quality\Config;
 
-use HHH\Command\Quality\Config\PhpUnitServiceConfig;
+use Hippy\Command\Quality\Config\PhpUnitServiceConfig;
 use PHPUnit\Framework\TestCase;
 
-/** @coversDefaultClass \HHH\Command\Quality\Config\PhpUnitServiceConfig */
+/** @coversDefaultClass \Hippy\Command\Quality\Config\PhpUnitServiceConfig */
 class PhpUnitServiceConfigTest extends TestCase
 {
     /**

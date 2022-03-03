@@ -1,9 +1,9 @@
 <?php
 
-namespace HHH\Config;
+namespace Hippy\Config;
 
-use HHH\Config\Partial\PartialInterface;
-use HHH\Model\Model;
+use Hippy\Config\Partial\PartialInterface;
+use Hippy\Model\Model;
 
 class Config extends Model implements ConfigInterface
 {

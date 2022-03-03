@@ -1,14 +1,14 @@
 <?php
 
-namespace HHH\Tests\Unit\Model;
+namespace Hippy\Tests\Unit\Model;
 
-use HHH\Error\ErrorCollection;
-use HHH\Model\Envelope;
-use HHH\Model\ModelInterface;
+use Hippy\Error\ErrorCollection;
+use Hippy\Model\Envelope;
+use Hippy\Model\ModelInterface;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
-/** @coversDefaultClass \HHH\Model\Envelope */
+/** @coversDefaultClass \Hippy\Model\Envelope */
 class EnvelopeTest extends TestCase
 {
     /**

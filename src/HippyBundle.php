@@ -1,9 +1,9 @@
 <?php
 
-namespace HHH;
+namespace Hippy;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class HHHBundle extends Bundle
+class HippyBundle extends Bundle
 {
 }

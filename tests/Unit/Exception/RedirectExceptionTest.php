@@ -1,13 +1,13 @@
 <?php
 
-namespace HHH\Tests\Unit\Exception;
+namespace Hippy\Tests\Unit\Exception;
 
-use HHH\Exception\Exception;
-use HHH\Exception\RedirectException;
+use Hippy\Exception\Exception;
+use Hippy\Exception\RedirectException;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-/** @coversDefaultClass \HHH\Exception\RedirectException */
+/** @coversDefaultClass \Hippy\Exception\RedirectException */
 class RedirectExceptionTest extends TestCase
 {
     /**

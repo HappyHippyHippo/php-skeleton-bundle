@@ -1,9 +1,9 @@
 <?php
 
-namespace HHH\Command\Quality;
+namespace Hippy\Command\Quality;
 
-use HHH\Command\Quality\Config\PhpCodeSnifferServiceConfig;
-use HHH\Command\Quality\Service\PhpCodeSnifferService;
+use Hippy\Command\Quality\Config\PhpCodeSnifferServiceConfig;
+use Hippy\Command\Quality\Service\PhpCodeSnifferService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

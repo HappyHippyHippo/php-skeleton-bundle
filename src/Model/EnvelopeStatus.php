@@ -1,8 +1,8 @@
 <?php
 
-namespace HHH\Model;
+namespace Hippy\Model;
 
-use HHH\Error\ErrorCollection;
+use Hippy\Error\ErrorCollection;
 
 class EnvelopeStatus extends Model
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace HHH\Tests\Unit\Command;
+namespace Hippy\Tests\Unit\Command;
 
-use HHH\Command\CommandException;
+use Hippy\Command\CommandException;
 use PHPUnit\Framework\TestCase;
 
-/** @coversDefaultClass \HHH\Command\CommandException */
+/** @coversDefaultClass \Hippy\Command\CommandException */
 class CommandExceptionTest extends TestCase
 {
     /**

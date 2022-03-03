@@ -1,15 +1,15 @@
 <?php
 
-namespace HHH\Tests\Unit\Config\Partial;
+namespace Hippy\Tests\Unit\Config\Partial;
 
-use HHH\Config\Partial\AbstractPartial;
-use HHH\Config\Partial\PartialInterface;
+use Hippy\Config\Partial\AbstractPartial;
+use Hippy\Config\Partial\PartialInterface;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 use ReflectionMethod;
 use RuntimeException;
 
-/** @coversDefaultClass \HHH\Config\Partial\AbstractPartial */
+/** @coversDefaultClass \Hippy\Config\Partial\AbstractPartial */
 class LoadTypeTest extends TestCase
 {
     /**
@@ -106,11 +106,11 @@ class LoadTypeTest extends TestCase
             }
         };
 
-        putenv('HHH_DOMAIN_FIELD=1');
+        putenv('HIPPY_DOMAIN_FIELD=1');
         $method = new ReflectionMethod(AbstractPartial::class, 'loadType');
         $method->invoke($sut, $path, 'bool', ['domain' => ['field' => false]]);
         $this->assertTrue($sut->get($path));
-        putenv('HHH_DOMAIN_FIELD=');
+        putenv('HIPPY_DOMAIN_FIELD=');
     }
 
     /**
@@ -209,11 +209,11 @@ class LoadTypeTest extends TestCase
             }
         };
 
-        putenv('HHH_DOMAIN_FIELD=' . $value);
+        putenv('HIPPY_DOMAIN_FIELD=' . $value);
         $method = new ReflectionMethod(AbstractPartial::class, 'loadType');
         $method->invoke($sut, $path, 'int', ['domain' => ['field' => 321]]);
         $this->assertEquals($value, $sut->get($path));
-        putenv('HHH_DOMAIN_FIELD=');
+        putenv('HIPPY_DOMAIN_FIELD=');
     }
 
     /**
@@ -312,11 +312,11 @@ class LoadTypeTest extends TestCase
             }
         };
 
-        putenv('HHH_DOMAIN_FIELD=' . $value);
+        putenv('HIPPY_DOMAIN_FIELD=' . $value);
         $method = new ReflectionMethod(AbstractPartial::class, 'loadType');
         $method->invoke($sut, $path, 'string', ['domain' => ['field' => '__dummy_other_value__']]);
         $this->assertEquals($value, $sut->get($path));
-        putenv('HHH_DOMAIN_FIELD=');
+        putenv('HIPPY_DOMAIN_FIELD=');
     }
 
     /**
@@ -415,10 +415,10 @@ class LoadTypeTest extends TestCase
             }
         };
 
-        putenv('HHH_DOMAIN_FIELD=' . $value[0]);
+        putenv('HIPPY_DOMAIN_FIELD=' . $value[0]);
         $method = new ReflectionMethod(AbstractPartial::class, 'loadType');
         $method->invoke($sut, $path, 'array', ['domain' => ['field' => '__dummy_other_value__']]);
         $this->assertEquals($value, $sut->get($path));
-        putenv('HHH_DOMAIN_FIELD=');
+        putenv('HIPPY_DOMAIN_FIELD=');
     }
 }

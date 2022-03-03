@@ -1,8 +1,8 @@
 <?php
 
-namespace HHH\Error;
+namespace Hippy\Error;
 
-use HHH\Model\ModelInterface;
+use Hippy\Model\ModelInterface;
 
 interface ErrorInterface extends ModelInterface
 {

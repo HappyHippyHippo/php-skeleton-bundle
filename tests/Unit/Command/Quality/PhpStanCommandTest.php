@@ -1,10 +1,10 @@
 <?php
 
-namespace HHH\Tests\Unit\Command\Quality;
+namespace Hippy\Tests\Unit\Command\Quality;
 
-use HHH\Command\Quality\Config\PhpStanServiceConfig;
-use HHH\Command\Quality\PhpStanCommand;
-use HHH\Command\Quality\Service\PhpStanService;
+use Hippy\Command\Quality\Config\PhpStanServiceConfig;
+use Hippy\Command\Quality\PhpStanCommand;
+use Hippy\Command\Quality\Service\PhpStanService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
@@ -14,7 +14,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-/** @coversDefaultClass \HHH\Command\Quality\PhpStanCommand */
+/** @coversDefaultClass \Hippy\Command\Quality\PhpStanCommand */
 class PhpStanCommandTest extends TestCase
 {
     /** @var PhpStanService&MockObject */

@@ -1,10 +1,10 @@
 <?php
 
-namespace HHH\Tests\Unit\Command\Quality;
+namespace Hippy\Tests\Unit\Command\Quality;
 
-use HHH\Command\Quality\Config\PhpUnitServiceConfig;
-use HHH\Command\Quality\PhpUnitCommand;
-use HHH\Command\Quality\Service\PhpUnitService;
+use Hippy\Command\Quality\Config\PhpUnitServiceConfig;
+use Hippy\Command\Quality\PhpUnitCommand;
+use Hippy\Command\Quality\Service\PhpUnitService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
@@ -14,7 +14,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-/** @coversDefaultClass \HHH\Command\Quality\PhpUnitCommand */
+/** @coversDefaultClass \Hippy\Command\Quality\PhpUnitCommand */
 class PhpUnitCommandTest extends TestCase
 {
     /** @var PhpUnitService&MockObject */

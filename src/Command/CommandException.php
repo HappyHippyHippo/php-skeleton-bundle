@@ -1,6 +1,6 @@
 <?php
 
-namespace HHH\Command;
+namespace Hippy\Command;
 
 use Closure;
 use Exception;

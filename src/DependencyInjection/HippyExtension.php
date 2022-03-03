@@ -1,6 +1,6 @@
 <?php
 
-namespace HHH\DependencyInjection;
+namespace Hippy\DependencyInjection;
 
 use Exception;
 use Symfony\Component\Config\FileLocator;
@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /** @codeCoverageIgnore */
-class HHHExtension extends Extension
+class HippyExtension extends Extension
 {
     /**
      * @param array<int|string, mixed> $configs
@@ -25,6 +25,6 @@ class HHHExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('HHH.config', $config);
+        $container->setParameter('hippy.config', $config);
     }
 }

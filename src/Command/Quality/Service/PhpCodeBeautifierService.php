@@ -1,10 +1,10 @@
 <?php
 
-namespace HHH\Command\Quality\Service;
+namespace Hippy\Command\Quality\Service;
 
-use HHH\Command\CommandException;
-use HHH\Command\Quality\Config\PhpCodeBeautifierServiceConfig;
-use HHH\Config\ConfigInterface;
+use Hippy\Command\CommandException;
+use Hippy\Command\Quality\Config\PhpCodeBeautifierServiceConfig;
+use Hippy\Config\ConfigInterface;
 use Symfony\Component\Console\Command\Command;
 
 class PhpCodeBeautifierService extends AbstractService

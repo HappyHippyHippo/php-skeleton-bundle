@@ -1,0 +1,239 @@
+testConstructor:
+  'no data':
+    code': ''
+    message: ''
+    codes:
+      service: ''
+      endpoint: ''
+      param: ''
+      code: ''
+    expected:
+      service: ''
+      endpoint: ''
+      param: ''
+      code: ''
+      message: ''
+      json:
+        code: ''
+        message: ''
+  'initial code':
+    code': __dummy_initial_code__
+    message: ''
+    codes:
+      service: ''
+      endpoint: ''
+      param: ''
+      code: ''
+    expected:
+      service: ''
+      endpoint: ''
+      param: ''
+      code: __dummy_initial_code__
+      message: ''
+      json:
+        code: ''
+        message: ''
+  'initial message':
+    code': ''
+    message: __dummy_message__
+    codes:
+      service: ''
+      endpoint: ''
+      param: ''
+      code: ''
+    expected:
+      service: ''
+      endpoint: ''
+      param: ''
+      code: ''
+      message: __dummy_message__
+      json:
+        code: ''
+        message: __dummy_message__
+  'override initial code to empty':
+    code': __dummy_initial_code__
+    message: ''
+    codes:
+      service: ''
+      endpoint: ''
+      param: ''
+      code: ''
+    expected:
+      service: ''
+      endpoint: ''
+      param: ''
+      code: __dummy_initial_code__
+      message: ''
+      json:
+        code: ''
+        message: ''
+  'setting code':
+    code': __dummy_initial_code__
+    message: ''
+    codes:
+      service: ''
+      endpoint: ''
+      param: ''
+      code: 100
+    expected:
+      service: ''
+      endpoint: ''
+      param: ''
+      code: __dummy_initial_code__
+      message: ''
+      json:
+        code: c100
+        message: ''
+  'setting code complex code':
+    code': __dummy_initial_code__
+    message: ''
+    codes:
+      service: ''
+      endpoint: ''
+      param: ''
+      code: s30.e2.c30
+    expected:
+      service: ''
+      endpoint: ''
+      param: ''
+      code: __dummy_initial_code__
+      message: ''
+      json:
+        code: s30.e2.c30
+        message: ''
+  'setting param':
+    code': __dummy_initial_code__
+    message: ''
+    codes:
+      service: ''
+      endpoint: ''
+      param: 100
+      code: ''
+    expected:
+      service: ''
+      endpoint: ''
+      param: ''
+      code: __dummy_initial_code__
+      message: ''
+      json:
+        code: p100
+        message: ''
+  'setting param complex code':
+    code': __dummy_initial_code__
+    message: ''
+    codes:
+      service: ''
+      endpoint: ''
+      param: s30.e2.c30
+      code: ''
+    expected:
+      service: ''
+      endpoint: ''
+      param: ''
+      code: __dummy_initial_code__
+      message: ''
+      json:
+        code: s30.e2.c30
+        message: ''
+  'setting endpoint':
+    code': __dummy_initial_code__
+    message: ''
+    codes:
+      service: ''
+      endpoint: 100
+      param: ''
+      code: ''
+    expected:
+      service: ''
+      endpoint: ''
+      param: ''
+      code: __dummy_initial_code__
+      message: ''
+      json:
+        code: e100
+        message: ''
+  'setting endpoint complex code':
+    code': __dummy_initial_code__
+    message: ''
+    codes:
+      service: ''
+      endpoint: s30.e2.c30
+      param: ''
+      code: ''
+    expected:
+      service: ''
+      endpoint: ''
+      param: ''
+      code: __dummy_initial_code__
+      message: ''
+      json:
+        code: s30.e2.c30
+        message: ''
+  'setting service':
+    code': __dummy_initial_code__
+    message: ''
+    codes:
+      service: 100
+      endpoint: ''
+      param: ''
+      code: ''
+    expected:
+      service: ''
+      endpoint: ''
+      param: ''
+      code: __dummy_initial_code__
+      message: ''
+      json:
+        code: s100
+        message: ''
+  'setting service complex code':
+    code': __dummy_initial_code__
+    message: ''
+    codes:
+      service: s30.e2.c30
+      endpoint: ''
+      param: ''
+      code: ''
+    expected:
+      service: ''
+      endpoint: ''
+      param: ''
+      code: __dummy_initial_code__
+      message: ''
+      json:
+        code: s30.e2.c30
+        message: ''
+  'setting all':
+    code': __dummy_initial_code__
+    message: __dummy_message__
+    codes:
+      service: 1
+      endpoint: 2
+      param: 3
+      code: 4
+    expected:
+      service: ''
+      endpoint: ''
+      param: ''
+      code: __dummy_initial_code__
+      message: __dummy_message__
+      json:
+        code: s1.e2.p3.c4
+        message: __dummy_message__
+  'setting all complex codes':
+    code': __dummy_initial_code__
+    message: __dummy_message__
+    codes:
+      service: __dummy_service__
+      endpoint: __dummy_endpoint__
+      param: __dummy_param__
+      code: __dummy_code__
+    expected:
+      service: ''
+      endpoint: ''
+      param: ''
+      code: __dummy_initial_code__
+      message: __dummy_message__
+      json:
+        code: __dummy_service__.__dummy_endpoint__.__dummy_param__.__dummy_code__
+        message: __dummy_message__

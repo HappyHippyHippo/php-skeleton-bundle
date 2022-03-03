@@ -1,0 +1,56 @@
+name: Code Quality
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup PHP, with composer and extensions
+      uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
+      with:
+        php-version: 8.1
+        extensions: pdo_sqlite
+        coverage: xdebug
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate
+
+    - name: Cache composer packages
+      id: composer-cache
+      uses: actions/cache@v2
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+
+    - name: Install dependencies
+      if: steps.composer-cache.outputs.cache-hit != 'true'
+      run: composer install --prefer-dist --no-progress --no-suggest
+
+    - name: Run PHP code beautifier
+      run: bin/console quality:phpcbf
+
+    - name: Run PHP code standard fixer
+      run: bin/console quality:phpfixer
+
+    - name: Run PHP code sniffer
+      run: bin/console quality:phpcs
+
+    - name: Run PHP stan
+      run: bin/console quality:phpstan
+
+    - name: Run PHP unit
+      run: bin/console quality:phpunit -f xml
+
+    - name: Validate test coverage
+      run: php phpunit-threshold.php tests-reports/phpunit/index.xml 90

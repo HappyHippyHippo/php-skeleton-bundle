@@ -1,0 +1,25 @@
+parameters:
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  _instanceof:
+    HHH\Config\Partial\PartialInterface:
+      tags: [HHH.config.partial]
+
+  HHH\:
+    resource: '../src/'
+    exclude:
+      - '../src/DependencyInjection/'
+      - '../src/Entity/'
+      - '../src/Kernel.php'
+      - '../tests/'
+
+  HHH\Config\Config:
+    arguments:
+      $root: '%kernel.project_dir%'
+      $partials: !tagged_iterator HHH.config.partial
+      $config: []

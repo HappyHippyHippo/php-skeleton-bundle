@@ -3,9 +3,12 @@
 namespace Hippy\Model;
 
 use Hippy\Error\ErrorCollection;
-use InvalidArgumentException;
-use JsonSerializable;
 
+/**
+ * @method EnvelopeStatus getStatus()
+ * @method ModelInterface|null getData()
+ * @method Envelope setData(ModelInterface|null $data)
+ */
 class Envelope extends Model
 {
     /** @var EnvelopeStatus */
@@ -26,31 +29,5 @@ class Envelope extends Model
             ),
             'data' => null,
         ]);
-    }
-
-    /**
-     * @return EnvelopeStatus
-     */
-    public function getStatus(): EnvelopeStatus
-    {
-        return $this->status;
-    }
-
-    /**
-     * @return ModelInterface|null
-     */
-    public function getData(): ?ModelInterface
-    {
-        return $this->data;
-    }
-
-    /**
-     * @param ModelInterface $data
-     * @return $this
-     */
-    public function setData(ModelInterface $data): Envelope
-    {
-        $this->data = $data;
-        return $this;
     }
 }

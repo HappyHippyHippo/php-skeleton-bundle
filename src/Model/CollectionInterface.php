@@ -20,11 +20,6 @@ interface CollectionInterface extends ModelInterface, Countable, IteratorAggrega
     public function setIdentifier(?callable $identifier): CollectionInterface;
 
     /**
-     * @return array<int|string, ModelInterface>
-     */
-    public function items(): array;
-
-    /**
      * @param callable $func
      * @return CollectionInterface<ModelInterface>
      */

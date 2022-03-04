@@ -4,6 +4,10 @@ namespace Hippy\Model;
 
 use Hippy\Error\ErrorCollection;
 
+/**
+ * @method bool isSuccess()
+ * @method ErrorCollection getErrors()
+ */
 class EnvelopeStatus extends Model
 {
     /** @var ErrorCollection */
@@ -16,21 +20,5 @@ class EnvelopeStatus extends Model
     public function __construct(protected bool $success, ?ErrorCollection $errors = null)
     {
         parent::__construct(['errors' => $errors ?? new ErrorCollection()]);
-    }
-
-    /**
-     * @return bool
-     */
-    public function isSuccess(): bool
-    {
-        return $this->success;
-    }
-
-    /**
-     * @return ErrorCollection
-     */
-    public function getErrors(): ErrorCollection
-    {
-        return $this->errors;
     }
 }

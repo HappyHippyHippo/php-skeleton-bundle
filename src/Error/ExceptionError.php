@@ -4,6 +4,11 @@ namespace Hippy\Error;
 
 use Throwable;
 
+/**
+ * @method string getFile()
+ * @method string|int getLine()
+ * @method array<int, mixed> getTrace()
+ */
 class ExceptionError extends Error
 {
     /** @var string */
@@ -27,29 +32,5 @@ class ExceptionError extends Error
         $this->file = $exception->getFile();
         $this->line = $exception->getLine();
         $this->trace = $exception->getTrace();
-    }
-
-    /**
-     * @return string
-     */
-    public function getFile(): string
-    {
-        return $this->file;
-    }
-
-    /**
-     * @return int|string
-     */
-    public function getLine(): int|string
-    {
-        return $this->line;
-    }
-
-    /**
-     * @return array<int, array<string, mixed>>
-     */
-    public function getTrace(): array
-    {
-        return $this->trace;
     }
 }

@@ -12,9 +12,6 @@ class ExceptionErrorTest extends TestCase
     /**
      * @return void
      * @covers ::__construct
-     * @covers ::getFile
-     * @covers ::getLine
-     * @covers ::getTrace
      */
     public function testConstruct(): void
     {

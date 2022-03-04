@@ -14,8 +14,6 @@ class EnvelopeTest extends TestCase
     /**
      * @return void
      * @covers ::__construct
-     * @covers ::getStatus
-     * @covers ::getData
      */
     public function testConstructWithoutErrorCollection(): void
     {
@@ -29,8 +27,6 @@ class EnvelopeTest extends TestCase
     /**
      * @return void
      * @covers ::__construct
-     * @covers ::getStatus
-     * @covers ::getData
      */
     public function testConstructWithEmptyErrorCollection(): void
     {
@@ -47,8 +43,6 @@ class EnvelopeTest extends TestCase
     /**
      * @return void
      * @covers ::__construct
-     * @covers ::getStatus
-     * @covers ::getData
      */
     public function testConstructWithNonEmptyErrorCollection(): void
     {
@@ -64,7 +58,7 @@ class EnvelopeTest extends TestCase
 
     /**
      * @return void
-     * @covers ::setData
+     * @covers ::__construct
      */
     public function testSetData(): void
     {

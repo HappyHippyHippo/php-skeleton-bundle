@@ -2,11 +2,10 @@
 
 namespace Hippy\Tests\Unit\Model;
 
+use BadMethodCallException;
 use DateTime;
 use Hippy\Model\Model;
 use Hippy\Model\ModelInterface;
-use Exception;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 use ReflectionMethod;
@@ -36,12 +35,217 @@ class ModelTest extends TestCase
 
     /**
      * @return void
+     * @covers ::__call
+     */
+    public function testCallIsTrue(): void
+    {
+        /** @method bool isField() */
+        $model = new class () extends Model {
+            /** @var bool $field */
+            protected bool $field = true;
+        };
+
+        $this->assertTrue($model->isField()); // @phpstan-ignore-line
+    }
+
+    /**
+     * @return void
+     * @covers ::__call
+     */
+    public function testCallIsFalse(): void
+    {
+        /** @method bool isField() */
+        $model = new class () extends Model {
+            /** @var bool $field */
+            protected bool $field = false;
+        };
+
+        $this->assertFalse($model->isField()); // @phpstan-ignore-line
+    }
+
+    /**
+     * @return void
+     * @covers ::__call
+     */
+    public function testCallIsThrowIfDoesntExists(): void
+    {
+        /** @method string getField() */
+        $model = new class () extends Model {
+            /** @var string $field */
+            protected string $field = '';
+        };
+
+        $this->expectException(BadMethodCallException::class);
+        $model->isFields(); // @phpstan-ignore-line
+    }
+
+    /**
+     * @return void
+     * @covers ::__call
+     */
+    public function testCallIsThrowIfInvalidType(): void
+    {
+        /** @method string getField() */
+        $model = new class () extends Model {
+            /** @var string $field */
+            protected string $field = '';
+        };
+
+        $this->expectException(BadMethodCallException::class);
+        $model->isField(); // @phpstan-ignore-line
+    }
+
+    /**
+     * @return void
+     * @covers ::__call
+     */
+    public function testCallGet(): void
+    {
+        /** @method string getField() */
+        $model = new class () extends Model {
+            /** @var string $field */
+            protected string $field = '__dummy_string__';
+        };
+
+        $this->assertEquals('__dummy_string__', $model->getField()); // @phpstan-ignore-line
+    }
+
+    /**
+     * @return void
+     * @covers ::__call
+     */
+    public function testCallGetThrowIfDoesntExists(): void
+    {
+        /** @method string getField() */
+        $model = new class () extends Model {
+            /** @var string $field */
+            protected string $field = '__dummy_string__';
+        };
+
+        $this->expectException(BadMethodCallException::class);
+        $model->getFields(); // @phpstan-ignore-line
+    }
+
+    /**
+     * @return void
+     * @covers ::__call
+     */
+    public function testCallGetThrowIfInvalidType(): void
+    {
+        /** @method string getField() */
+        $model = new class () extends Model {
+            /** @var bool $field */
+            protected bool $field = true;
+        };
+
+        $this->expectException(BadMethodCallException::class);
+        $model->getField(); // @phpstan-ignore-line
+    }
+
+    /**
+     * @return void
+     * @covers ::__call
+     */
+    public function testCallSetScalar(): void
+    {
+        /**
+         * @method string getField()
+         * @method ModelInterface setField(string $value)
+         */
+        $model = new class () extends Model {
+            /** @var string $field */
+            protected string $field = '__dummy_string__';
+        };
+
+        $model->setField('__dummy_other_string__'); // @phpstan-ignore-line
+        $this->assertEquals('__dummy_other_string__', $model->getField()); // @phpstan-ignore-line
+    }
+
+    /**
+     * @return void
+     * @covers ::__call
+     */
+    public function testCallSetArray(): void
+    {
+        /**
+         * @method string[] getField()
+         * @method ModelInterface setField(string[] $value)
+         */
+        $model = new class () extends Model {
+            /** @var string[] $field */
+            protected array $field = ['__dummy_string__'];
+        };
+
+        $model->setField(['__dummy_other_string__']); // @phpstan-ignore-line
+        $this->assertEquals(['__dummy_other_string__'], $model->getField()); // @phpstan-ignore-line
+    }
+
+    /**
+     * @return void
+     * @covers ::__call
+     */
+    public function testCallSetThrowIfMissingArgument(): void
+    {
+        /**
+         * @method string getField()
+         * @method ModelInterface setField(string $value)
+         */
+        $model = new class () extends Model {
+            /** @var string $field */
+            protected string $field = '__dummy_string__';
+        };
+
+        $this->expectException(\InvalidArgumentException::class);
+        $model->setField(); // @phpstan-ignore-line
+    }
+
+    /**
+     * @return void
+     * @covers ::__call
+     */
+    public function testCallSetThrowIfDoesntExists(): void
+    {
+        /**
+         * @method string getField()
+         * @method ModelInterface setField(string $value)
+         */
+        $model = new class () extends Model {
+            /** @var string $field */
+            protected string $field = '__dummy_string__';
+        };
+
+        $this->expectException(BadMethodCallException::class);
+        $model->setFields('__dummy_other_string__'); // @phpstan-ignore-line
+    }
+
+    /**
+     * @return void
+     * @covers ::__call
+     */
+    public function testCallSetThrowIfInvalidType(): void
+    {
+        /**
+         * @method string getField()
+         * @method ModelInterface setField(string $value)
+         */
+        $model = new class () extends Model {
+            /** @var string $field */
+            protected string $field = '__dummy_string__';
+        };
+
+        $this->expectException(BadMethodCallException::class);
+        $model->setFields(false); // @phpstan-ignore-line
+    }
+
+    /**
+     * @return void
      * @covers ::set
      */
     public function testSet(): void
     {
         $values = ['field' => '__dummy_value__'];
         $model = new class () extends Model {
+            /** @var string $field */
             protected string $field;
 
             public function getField(): string

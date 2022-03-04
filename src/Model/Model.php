@@ -2,10 +2,12 @@
 
 namespace Hippy\Model;
 
+use BadMethodCallException;
 use DateTime;
 use Exception;
-use InvalidArgumentException;
 use JsonSerializable;
+use ReflectionException;
+use ReflectionProperty;
 
 abstract class Model implements ModelInterface
 {
@@ -20,6 +22,44 @@ abstract class Model implements ModelInterface
         if (count($values)) {
             $this->set($values);
         }
+    }
+
+    /**
+     * @param string $name
+     * @param array<int|string, mixed> $arguments
+     * @return mixed
+     * @throws BadMethodCallException
+     * @throws ReflectionException
+     */
+    public function __call(string $name, array $arguments): mixed
+    {
+        $type = function (string $field): string {
+            $prop = new ReflectionProperty($this, $field);
+            return (string) $prop->getType();
+        };
+
+        if (str_starts_with($name, 'is')) {
+            $field = lcfirst(substr($name, 2));
+            if (property_exists($this, $field) && $type($field) == 'bool') {
+                return $this->$field;
+            }
+        } elseif (str_starts_with($name, 'get')) {
+            $field = lcfirst(substr($name, 3));
+            if (property_exists($this, $field) && $type($field) != 'bool') {
+                return $this->$field;
+            }
+        } elseif (str_starts_with($name, 'set')) {
+            $field = lcfirst(substr($name, 3));
+            if (property_exists($this, $field)) {
+                if (!isset($arguments[0])) {
+                    throw new \InvalidArgumentException('missing set argument');
+                }
+                $this->$field = $arguments[0];
+                return $this;
+            }
+        }
+
+        throw new BadMethodCallException();
     }
 
     /**

@@ -16,19 +16,17 @@ class CollectionTest extends TestCase
     /**
      * @return void
      * @covers ::__construct
-     * @covers ::items
      */
     public function testConstructWithoutArgument(): void
     {
         $collection = $this->getMockForAbstractClass(Collection::class);
 
-        $this->assertEquals([], $collection->items());
+        $this->assertEquals([], $collection->getItems());
     }
 
     /**
      * @return void
      * @covers ::__construct
-     * @covers ::items
      */
     public function testConstructWithArgument(): void
     {
@@ -44,7 +42,7 @@ class CollectionTest extends TestCase
             }
         };
 
-        $this->assertEquals([$item1, $item2], $collection->items());
+        $this->assertEquals([$item1, $item2], $collection->getItems());
     }
 
     /**
@@ -200,7 +198,7 @@ class CollectionTest extends TestCase
         }));
 
         $this->assertEquals(4, $callCount);
-        $this->assertEquals($expected, $collection->items());
+        $this->assertEquals($expected, $collection->getItems());
     }
 
     /**

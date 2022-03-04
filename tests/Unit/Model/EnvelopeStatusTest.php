@@ -12,8 +12,6 @@ class EnvelopeStatusTest extends TestCase
     /**
      * @return void
      * @covers ::__construct
-     * @covers ::isSuccess
-     * @covers ::getErrors
      */
     public function testConstruct(): void
     {

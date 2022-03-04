@@ -5,6 +5,10 @@ namespace Hippy\Model;
 use ArrayIterator;
 use InvalidArgumentException;
 
+/**
+ * @method ModelInterface[] getItems()
+ * @method callable|null getIdentifier()
+ */
 abstract class Collection extends Model implements CollectionInterface
 {
     /** @var ModelInterface[] */
@@ -36,14 +40,6 @@ abstract class Collection extends Model implements CollectionInterface
         $this->identifier = $identifier;
 
         return $this;
-    }
-
-    /**
-     * @return ModelInterface[]
-     */
-    public function items(): array
-    {
-        return $this->items;
     }
 
     /**

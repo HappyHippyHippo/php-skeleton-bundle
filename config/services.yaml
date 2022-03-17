@@ -7,7 +7,7 @@ services:
     public: false
 
   _instanceof:
-    Hippy\Config\Partial\AbstractPartial:
+    Hippy\Config\Partial\PartialInterface:
       tags: [hippy.config.partial]
 
   Hippy\:

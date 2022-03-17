@@ -7,8 +7,8 @@ services:
     public: false
 
   _instanceof:
-    Hippy\Config\Partial\PartialInterface:
-      tags: [Hippy.config.partial]
+    Hippy\Config\Partial\AbstractPartial:
+      tags: [hippy.config.partial]
 
   Hippy\:
     resource: '../../'
@@ -20,6 +20,6 @@ services:
 
   Hippy\Config\Config:
     arguments:
-      $partials: !tagged_iterator Hippy.config.partial
+      $partials: !tagged_iterator hippy.config.partial
       $root: '%kernel.project_dir%'
       $config: []

@@ -3,7 +3,7 @@
 namespace Hippy\Tests\Unit\Config;
 
 use Hippy\Config\Config;
-use Hippy\Config\Partial\PartialInterface;
+use Hippy\Config\Partial\AbstractPartial;
 use PHPUnit\Framework\TestCase;
 
 /** @coversDefaultClass \Hippy\Config\Config */
@@ -18,7 +18,7 @@ class ConfigTest extends TestCase
         $root = '__dummy_root__';
         $config1 = ['__dummy_config_1__'];
         $config2 = ['__dummy_config_2__'];
-        $partial = $this->createMock(PartialInterface::class);
+        $partial = $this->createMock(AbstractPartial::class);
         $partial
             ->expects($this->once())
             ->method('load')
@@ -30,13 +30,12 @@ class ConfigTest extends TestCase
     /**
      * @return void
      * @covers ::__construct
-     * @covers ::getRoot
      */
     public function testGetRoot(): void
     {
         $root = '__dummy_root__';
         $config = ['__dummy_config__'];
-        $partial = $this->createMock(PartialInterface::class);
+        $partial = $this->createMock(AbstractPartial::class);
         $partial->expects($this->once())->method('load')->with($config)->willReturn($partial);
         $sut = new Config($root, [$partial], [$config]);
 
@@ -69,7 +68,11 @@ class ConfigTest extends TestCase
         $path = '__dummy_path__';
         $value = 123;
 
-        $partial = $this->createMock(PartialInterface::class);
+        $partial = $this->getMockBuilder(AbstractPartial::class)
+            ->onlyMethods(['load', 'supports', 'get'])
+            ->addMethods(['getDomain'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $partial->expects($this->once())->method('getDomain')->willReturn($domain);
         $partial->expects($this->once())->method('load')->willReturn($partial);
         $partial->expects($this->once())->method('supports')->with($path)->willReturn(true);
@@ -92,9 +95,13 @@ class ConfigTest extends TestCase
         $domain = '__dummy_domain__';
         $json = ['__dummy_json__'];
 
-        $partial = $this->createMock(PartialInterface::class);
-        $partial->expects($this->once())->method('load')->with($config)->willReturn($partial);
+        $partial = $this->getMockBuilder(AbstractPartial::class)
+            ->onlyMethods(['load', 'jsonSerialize'])
+            ->addMethods(['getDomain'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $partial->expects($this->once())->method('getDomain')->willReturn($domain);
+        $partial->expects($this->once())->method('load')->with($config)->willReturn($partial);
         $partial->expects($this->once())->method('jsonSerialize')->willReturn($json);
 
         $sut = new Config($root, [$partial], [$config]);

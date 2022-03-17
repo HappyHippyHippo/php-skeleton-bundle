@@ -13,7 +13,6 @@ class AbstractPartialTest extends TestCase
     /**
      * @return void
      * @covers ::__construct
-     * @covers ::getDomain
      */
     public function testGetDomain(): void
     {

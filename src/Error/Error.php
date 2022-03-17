@@ -4,7 +4,11 @@ namespace Hippy\Error;
 
 use Hippy\Model\Model;
 
-class Error extends Model implements ErrorInterface
+/**
+ * @method string getMessage()
+ * @method Error setMessage(string $message)
+ */
+class Error extends Model
 {
     /** @var array<int|string> */
     protected array $code;
@@ -41,12 +45,11 @@ class Error extends Model implements ErrorInterface
 
     /**
      * @param int|string $code
-     * @return ErrorInterface
+     * @return $this
      */
-    public function setService(int|string $code): ErrorInterface
+    public function setService(int|string $code): self
     {
         $this->code['service'] = $code;
-
         return $this;
     }
 
@@ -60,12 +63,10 @@ class Error extends Model implements ErrorInterface
 
     /**
      * @param int|string $code
-     * @return ErrorInterface
-     */
-    public function setEndpoint(int|string $code): ErrorInterface
+c     */
+    public function setEndpoint(int|string $code): self
     {
         $this->code['endpoint'] = $code;
-
         return $this;
     }
 
@@ -79,12 +80,11 @@ class Error extends Model implements ErrorInterface
 
     /**
      * @param int|string $code
-     * @return ErrorInterface
+     * @return $this
      */
-    public function setParam(int|string $code): ErrorInterface
+    public function setParam(int|string $code): self
     {
         $this->code['param'] = $code;
-
         return $this;
     }
 
@@ -98,31 +98,11 @@ class Error extends Model implements ErrorInterface
 
     /**
      * @param int|string $code
-     * @return ErrorInterface
+     * @return $this
      */
-    public function setCode(int|string $code): ErrorInterface
+    public function setCode(int|string $code): self
     {
         $this->code['code'] = $code;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMessage(): string
-    {
-        return $this->message;
-    }
-
-    /**
-     * @param string $message
-     * @return ErrorInterface
-     */
-    public function setMessage(string $message): ErrorInterface
-    {
-        $this->message = $message;
-
         return $this;
     }
 }

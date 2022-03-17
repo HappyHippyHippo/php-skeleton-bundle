@@ -2,23 +2,29 @@
 
 namespace Hippy\Model;
 
+use ArrayAccess;
 use ArrayIterator;
+use Countable;
 use InvalidArgumentException;
+use IteratorAggregate;
 
 /**
- * @method ModelInterface[] getItems()
+ * @method Model[] getItems()
  * @method callable|null getIdentifier()
+ * @method Collection setIdentifier(callable|null $identifier)
+ * @implements IteratorAggregate<int, Model>
+ * @implements ArrayAccess<int, Model>
  */
-abstract class Collection extends Model implements CollectionInterface
+abstract class Collection extends Model implements Countable, IteratorAggregate, ArrayAccess
 {
-    /** @var ModelInterface[] */
+    /** @var Model[] */
     protected array $items = [];
 
     /** @var callable|null */
     protected mixed $identifier = null;
 
     /**
-     * @param ModelInterface[] $items
+     * @param Model[] $items
      * @throws InvalidArgumentException
      */
     public function __construct(array $items = [])
@@ -32,15 +38,10 @@ abstract class Collection extends Model implements CollectionInterface
     }
 
     /**
-     * @param callable|null $identifier
-     * @return $this
+     * @param Model $item
+     * @return Collection
      */
-    public function setIdentifier(?callable $identifier): CollectionInterface
-    {
-        $this->identifier = $identifier;
-
-        return $this;
-    }
+    abstract public function add(Model $item): Collection;
 
     /**
      * @return int
@@ -61,21 +62,21 @@ abstract class Collection extends Model implements CollectionInterface
 
     /**
      * @param int|string $offset
-     * @return ModelInterface
+     * @return Model
      */
-    public function offsetGet(mixed $offset): ModelInterface
+    public function offsetGet(mixed $offset): Model
     {
         return $this->items[$offset];
     }
 
     /**
      * @param int|string $offset
-     * @param ModelInterface $value
+     * @param Model $value
      * @return void
      */
     public function offsetSet(mixed $offset, mixed $value): void
     {
-        if (!($value instanceof ModelInterface)) {
+        if (!($value instanceof Model)) {
             throw new InvalidArgumentException('trying to store a non-model value');
         }
         $this->items[$offset] = $value;
@@ -90,7 +91,7 @@ abstract class Collection extends Model implements CollectionInterface
     }
 
     /**
-     * @return ArrayIterator<int|string, ModelInterface>
+     * @return ArrayIterator<int|string, Model>
      */
     public function getIterator(): ArrayIterator
     {
@@ -101,7 +102,7 @@ abstract class Collection extends Model implements CollectionInterface
      * @param callable $func
      * @return $this
      */
-    public function each(callable $func): CollectionInterface
+    public function each(callable $func): Collection
     {
         foreach ($this->items as &$item) {
             $item = $func($item);
@@ -114,7 +115,7 @@ abstract class Collection extends Model implements CollectionInterface
      * @param callable $compare
      * @return $this
      */
-    public function filter(callable $compare): CollectionInterface
+    public function filter(callable $compare): Collection
     {
         foreach ($this->items as $key => $item) {
             if (!$compare($item)) {
@@ -127,9 +128,9 @@ abstract class Collection extends Model implements CollectionInterface
 
     /**
      * @param callable $compare
-     * @return ModelInterface|null
+     * @return Model|null
      */
-    public function find(callable $compare): ?ModelInterface
+    public function find(callable $compare): ?Model
     {
         foreach ($this->items as $item) {
             if ($compare($item)) {

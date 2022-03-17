@@ -5,7 +5,7 @@ namespace Hippy\Tests\Unit\Exception;
 use Hippy\Error\Error;
 use Hippy\Error\ErrorCollection;
 use Hippy\Exception\Exception;
-use Hippy\Model\ModelInterface;
+use Hippy\Model\Model;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,7 +64,7 @@ class ExceptionTest extends TestCase
      * @covers ::getErrors
      * @dataProvider providerForErrorsTests
      */
-    public function testAddAndGetErrorFunctions(array $errors): void
+    public function testAddError(array $errors): void
     {
         $sut = new Exception();
         foreach ($errors as $error) {
@@ -84,18 +84,36 @@ class ExceptionTest extends TestCase
      * @param Error[] $errors
      * @return void
      * @covers ::addErrors
+     * @covers ::getErrors
      * @dataProvider providerForErrorsTests
      */
     public function testAddErrors(array $errors): void
     {
-        $collection = new ErrorCollection();
-        foreach ($errors as $error) {
-            $collection->add($error);
-        }
-
         $sut = new Exception();
-        $sut->addErrors($collection);
+        $sut->addErrors(new ErrorCollection($errors));
 
+        $storedErrors = $sut->getErrors();
+        $this->assertEquals(count($errors), count($storedErrors));
+
+        $serializedErrors = $storedErrors->jsonSerialize();
+        foreach ($serializedErrors as $index => $serializedError) {
+            $this->assertSame($errors[$index]->jsonSerialize(), $serializedError);
+        }
+    }
+
+    /**
+     * @param Error[] $errors
+     * @return void
+     * @covers ::setErrors
+     * @covers ::getErrors
+     * @dataProvider providerForErrorsTests
+     */
+    public function testSetErrors(array $errors): void
+    {
+        $sut = new Exception();
+        $sut->addErrors(new ErrorCollection([new Error(999, '__dummy_deleted_message__')]));
+
+        $sut->setErrors(new ErrorCollection($errors));
         $storedErrors = $sut->getErrors();
         $this->assertEquals(count($errors), count($storedErrors));
 
@@ -112,7 +130,7 @@ class ExceptionTest extends TestCase
      */
     public function testDataGetterAndSetter(): void
     {
-        $data = $this->createMock(ModelInterface::class);
+        $data = $this->createMock(Model::class);
 
         $sut = new Exception();
 
@@ -132,16 +150,16 @@ class ExceptionTest extends TestCase
             ],
             'single error' => [
                 'errors' => [
-                    new Error(456, '__dummy_transformer_message__'),
+                    new Error(456, '__dummy_message__'),
                 ],
             ],
-            'alot of errors' => [
+            'a lot of errors' => [
                 'errors' => [
-                    new Error(12, '__dummy_transformer_message_1__'),
-                    new Error(34, '__dummy_transformer_message_2__'),
-                    new Error(56, '__dummy_transformer_message_3__'),
-                    new Error(78, '__dummy_transformer_message_4__'),
-                    new Error(90, '__dummy_transformer_message_5__'),
+                    new Error(12, '__dummy_message_1__'),
+                    new Error(34, '__dummy_message_2__'),
+                    new Error(56, '__dummy_message_3__'),
+                    new Error(78, '__dummy_message_4__'),
+                    new Error(90, '__dummy_message_5__'),
                 ],
             ],
         ];

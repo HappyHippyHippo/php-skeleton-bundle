@@ -2,16 +2,19 @@
 
 namespace Hippy\Config;
 
-use Hippy\Config\Partial\PartialInterface;
+use Hippy\Config\Partial\AbstractPartial;
 use Hippy\Model\Model;
 
-class Config extends Model implements ConfigInterface
+/**
+ * @method string getRoot()
+ */
+class Config extends Model
 {
-    /** @var PartialInterface[] */
+    /** @var AbstractPartial[] */
     protected array $partials = [];
 
     /**
-     * @param iterable<PartialInterface> $partials
+     * @param iterable<AbstractPartial> $partials
      * @param array<int|string, mixed>   $config
      */
     public function __construct(protected string $root = '', iterable $partials = [], array $config = [])
@@ -26,18 +29,10 @@ class Config extends Model implements ConfigInterface
         }, []);
 
         foreach ($partials as $partial) {
-            if ($partial instanceof PartialInterface) {
+            if ($partial instanceof AbstractPartial) {
                 $this->partials[$partial->getDomain()] = $partial->load($config);
             }
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getRoot(): string
-    {
-        return $this->root;
     }
 
     /**

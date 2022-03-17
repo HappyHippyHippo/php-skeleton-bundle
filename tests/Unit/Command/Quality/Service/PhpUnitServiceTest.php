@@ -5,7 +5,7 @@ namespace Hippy\Tests\Unit\Command\Quality\Service;
 use Hippy\Command\CommandException;
 use Hippy\Command\Quality\Config\PhpUnitServiceConfig;
 use Hippy\Command\Quality\Service\PhpUnitService;
-use Hippy\Config\ConfigInterface;
+use Hippy\Config\Config;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
@@ -17,8 +17,8 @@ class PhpUnitServiceTest extends TestCase
     /** @var string */
     protected const ROOT = '__dummy_root__';
 
-    /** @var ConfigInterface&MockObject */
-    protected ConfigInterface $config;
+    /** @var Config&MockObject */
+    protected Config $config;
 
     /** @var PhpUnitServiceConfig&MockObject */
     protected PhpUnitServiceConfig $phpunitConfig;
@@ -31,7 +31,7 @@ class PhpUnitServiceTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->config = $this->createMock(ConfigInterface::class);
+        $this->config = $this->getMockBuilder(Config::class)->addMethods(['getRoot'])->getMock();
         $this->phpunitConfig = $this->createMock(PhpUnitServiceConfig::class);
         $this->sut = $this->getMockBuilder(PhpUnitService::class)
             ->setConstructorArgs([$this->config])

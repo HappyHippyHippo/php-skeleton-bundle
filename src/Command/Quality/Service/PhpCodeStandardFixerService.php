@@ -4,16 +4,16 @@ namespace Hippy\Command\Quality\Service;
 
 use Hippy\Command\CommandException;
 use Hippy\Command\Quality\Config\PhpCodeStandardFixerServiceConfig;
-use Hippy\Config\ConfigInterface;
+use Hippy\Config\Config;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 class PhpCodeStandardFixerService extends AbstractService
 {
     /**
-     * @param ConfigInterface $config
+     * @param Config $config
      */
-    public function __construct(protected ConfigInterface $config)
+    public function __construct(protected Config $config)
     {
     }
 

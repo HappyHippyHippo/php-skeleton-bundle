@@ -29,7 +29,7 @@ class RedirectException extends Exception
     /**
      * @return string
      */
-    public function getURL(): string
+    public function getUrl(): string
     {
         return $this->url;
     }

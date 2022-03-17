@@ -5,7 +5,7 @@ namespace Hippy\Tests\Unit\Command\Quality\Service;
 use Hippy\Command\CommandException;
 use Hippy\Command\Quality\Config\PhpCodeSnifferServiceConfig;
 use Hippy\Command\Quality\Service\PhpCodeSnifferService;
-use Hippy\Config\ConfigInterface;
+use Hippy\Config\Config;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
@@ -18,8 +18,8 @@ class PhpCodeSnifferServiceTest extends TestCase
     /** @var string */
     protected const ROOT = '__dummy_root__';
 
-    /** @var ConfigInterface&MockObject */
-    protected ConfigInterface $config;
+    /** @var Config&MockObject */
+    protected Config $config;
 
     /** @var PhpCodeSnifferServiceConfig&MockObject */
     protected PhpCodeSnifferServiceConfig $phpcsConfig;
@@ -35,7 +35,7 @@ class PhpCodeSnifferServiceTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->config = $this->createMock(ConfigInterface::class);
+        $this->config = $this->getMockBuilder(Config::class)->addMethods(['getRoot'])->getMock();
         $this->phpcsConfig = $this->createMock(PhpCodeSnifferServiceConfig::class);
         $this->styler = $this->createMock(SymfonyStyle::class);
         $this->sut = $this->getMockBuilder(PhpCodeSnifferService::class)

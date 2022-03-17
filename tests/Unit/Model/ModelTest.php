@@ -5,7 +5,6 @@ namespace Hippy\Tests\Unit\Model;
 use BadMethodCallException;
 use DateTime;
 use Hippy\Model\Model;
-use Hippy\Model\ModelInterface;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 use ReflectionMethod;
@@ -17,6 +16,7 @@ class ModelTest extends TestCase
     /**
      * @return void
      * @covers ::__construct
+     * @covers ::set
      */
     public function testConstructor(): void
     {
@@ -150,7 +150,7 @@ class ModelTest extends TestCase
     {
         /**
          * @method string getField()
-         * @method ModelInterface setField(string $value)
+         * @method Model setField(string $value)
          */
         $model = new class () extends Model {
             /** @var string $field */
@@ -169,7 +169,7 @@ class ModelTest extends TestCase
     {
         /**
          * @method string[] getField()
-         * @method ModelInterface setField(string[] $value)
+         * @method Model setField(string[] $value)
          */
         $model = new class () extends Model {
             /** @var string[] $field */
@@ -188,7 +188,7 @@ class ModelTest extends TestCase
     {
         /**
          * @method string getField()
-         * @method ModelInterface setField(string $value)
+         * @method Model setField(string $value)
          */
         $model = new class () extends Model {
             /** @var string $field */
@@ -207,7 +207,7 @@ class ModelTest extends TestCase
     {
         /**
          * @method string getField()
-         * @method ModelInterface setField(string $value)
+         * @method Model setField(string $value)
          */
         $model = new class () extends Model {
             /** @var string $field */
@@ -226,7 +226,7 @@ class ModelTest extends TestCase
     {
         /**
          * @method string getField()
-         * @method ModelInterface setField(string $value)
+         * @method Model setField(string $value)
          */
         $model = new class () extends Model {
             /** @var string $field */
@@ -235,27 +235,6 @@ class ModelTest extends TestCase
 
         $this->expectException(BadMethodCallException::class);
         $model->setFields(false); // @phpstan-ignore-line
-    }
-
-    /**
-     * @return void
-     * @covers ::set
-     */
-    public function testSet(): void
-    {
-        $values = ['field' => '__dummy_value__'];
-        $model = new class () extends Model {
-            /** @var string $field */
-            protected string $field;
-
-            public function getField(): string
-            {
-                return $this->field;
-            }
-        };
-
-        $model->set($values);
-        $this->assertEquals($values['field'], $model->getField());
     }
 
     /**
@@ -401,13 +380,13 @@ class ModelTest extends TestCase
     }
 
     /**
-     * @param ModelInterface $model
+     * @param Model $model
      * @param array<string, mixed> $expected
      * @return void
      * @covers ::jsonSerialize
      * @dataProvider providerForJsonSerializeTests
      */
-    public function testJsonSerialize(ModelInterface $model, array $expected): void
+    public function testJsonSerialize(Model $model, array $expected): void
     {
         $this->assertEquals($expected, $model->jsonSerialize());
     }
@@ -418,7 +397,7 @@ class ModelTest extends TestCase
      */
     public function providerForJsonSerializeTests(): array
     {
-        $creator = function (array $fields = [], array $parsers = []): ModelInterface {
+        $creator = function (array $fields = [], array $parsers = []): Model {
             $model = $this->getMockForAbstractClass(Model::class);
             foreach ($fields as $field => $value) {
                 $model->$field = $value;

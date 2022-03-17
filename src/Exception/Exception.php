@@ -3,8 +3,8 @@
 namespace Hippy\Exception;
 
 use Hippy\Error\ErrorCollection;
-use Hippy\Error\ErrorInterface;
-use Hippy\Model\ModelInterface;
+use Hippy\Error\Error;
+use Hippy\Model\Model;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
@@ -14,8 +14,8 @@ class Exception extends HttpException
     /** @var ErrorCollection */
     protected ErrorCollection $errors;
 
-    /** @var ModelInterface|null */
-    protected ?ModelInterface $data;
+    /** @var Model|null */
+    protected ?Model $data;
 
     /**
      * @param int $statusCode
@@ -37,24 +37,24 @@ class Exception extends HttpException
     }
 
     /**
-     * @param ErrorInterface $error
+     * @param Error $error
      * @return $this
      */
-    public function addError(ErrorInterface $error): Exception
+    public function addError(Error $error): self
     {
         $this->errors->add($error);
-
         return $this;
     }
 
     /**
-     * @param ErrorCollection $collection
+     * @param ErrorCollection $errors
      * @return $this
      */
-    public function addErrors(ErrorCollection $collection): Exception
+    public function addErrors(ErrorCollection $errors): self
     {
-        $this->errors = $collection;
-
+        foreach ($errors as $error) {
+            $this->errors->add($error);
+        }
         return $this;
     }
 
@@ -67,21 +67,30 @@ class Exception extends HttpException
     }
 
     /**
-     * @param ModelInterface|null $data
+     * @param ErrorCollection $errors
      * @return $this
      */
-    public function setData(?ModelInterface $data): Exception
+    public function setErrors(ErrorCollection $errors): self
     {
-        $this->data = $data;
-
+        $this->errors = $errors;
         return $this;
     }
 
     /**
-     * @return ModelInterface|null
+     * @return Model|null
      */
-    public function getData(): ?ModelInterface
+    public function getData(): ?Model
     {
         return $this->data;
+    }
+
+    /**
+     * @param Model $data
+     * @return $this
+     */
+    public function setData(Model $data): self
+    {
+        $this->data = $data;
+        return $this;
     }
 }

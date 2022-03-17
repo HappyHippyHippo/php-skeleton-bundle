@@ -5,7 +5,7 @@ namespace Hippy\Tests\Unit\Command\Quality\Service;
 use Hippy\Command\CommandException;
 use Hippy\Command\Quality\Config\PhpStanServiceConfig;
 use Hippy\Command\Quality\Service\PhpStanService;
-use Hippy\Config\ConfigInterface;
+use Hippy\Config\Config;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
@@ -18,8 +18,8 @@ class PhpStanServiceTest extends TestCase
     /** @var string */
     protected const ROOT = '__dummy_root__';
 
-    /** @var ConfigInterface&MockObject */
-    protected ConfigInterface $config;
+    /** @var Config&MockObject */
+    protected Config $config;
 
     /** @var PhpStanServiceConfig&MockObject */
     protected PhpStanServiceConfig $phpstanConfig;
@@ -35,7 +35,7 @@ class PhpStanServiceTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->config = $this->createMock(ConfigInterface::class);
+        $this->config = $this->getMockBuilder(Config::class)->addMethods(['getRoot'])->getMock();
         $this->phpstanConfig = $this->createMock(PhpStanServiceConfig::class);
         $this->styler = $this->createMock(SymfonyStyle::class);
         $this->sut = $this->getMockBuilder(PhpStanService::class)

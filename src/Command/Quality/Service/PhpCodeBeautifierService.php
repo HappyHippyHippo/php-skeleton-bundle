@@ -4,15 +4,15 @@ namespace Hippy\Command\Quality\Service;
 
 use Hippy\Command\CommandException;
 use Hippy\Command\Quality\Config\PhpCodeBeautifierServiceConfig;
-use Hippy\Config\ConfigInterface;
+use Hippy\Config\Config;
 use Symfony\Component\Console\Command\Command;
 
 class PhpCodeBeautifierService extends AbstractService
 {
     /**
-     * @param ConfigInterface $config
+     * @param Config $config
      */
-    public function __construct(protected ConfigInterface $config)
+    public function __construct(protected Config $config)
     {
     }
 

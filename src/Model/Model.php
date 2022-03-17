@@ -9,7 +9,7 @@ use JsonSerializable;
 use ReflectionException;
 use ReflectionProperty;
 
-abstract class Model implements ModelInterface
+abstract class Model implements JsonSerializable
 {
     /** @var callable[] */
     private array $parsers = [];
@@ -63,21 +63,6 @@ abstract class Model implements ModelInterface
     }
 
     /**
-     * @param array<string, mixed> $values
-     * @return $this
-     */
-    public function set(array $values): ModelInterface
-    {
-        foreach ($values as $key => $value) {
-            if ($key != 'parsers' && property_exists($this, $key)) {
-                $this->$key = $value;
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array
@@ -105,14 +90,27 @@ abstract class Model implements ModelInterface
     }
 
     /**
+     * @param array<string, mixed> $values
+     * @return $this
+     */
+    protected function set(array $values): self
+    {
+        foreach ($values as $key => $value) {
+            if ($key != 'parsers' && property_exists($this, $key)) {
+                $this->$key = $value;
+            }
+        }
+        return $this;
+    }
+
+    /**
      * @param string $name
      * @param callable $parser
      * @return $this
      */
-    protected function addParser(string $name, callable $parser): ModelInterface
+    protected function addParser(string $name, callable $parser): self
     {
         $this->parsers[$name] = $parser;
-
         return $this;
     }
 
@@ -120,12 +118,11 @@ abstract class Model implements ModelInterface
      * @param string $name
      * @return $this
      */
-    protected function addHideParser(string $name): ModelInterface
+    protected function addHideParser(string $name): self
     {
         $this->parsers[$name] = function () {
             return null;
         };
-
         return $this;
     }
 
@@ -133,12 +130,11 @@ abstract class Model implements ModelInterface
      * @param string $name
      * @return $this
      */
-    protected function addObfuscateParser(string $name): ModelInterface
+    protected function addObfuscateParser(string $name): self
     {
         $this->parsers[$name] = function () {
             return '******';
         };
-
         return $this;
     }
 
@@ -146,12 +142,11 @@ abstract class Model implements ModelInterface
      * @param string $name
      * @return $this
      */
-    protected function addDateTimeParser(string $name): ModelInterface
+    protected function addDateTimeParser(string $name): self
     {
         $this->parsers[$name] = function (?DateTime $date) {
             return $this->fromDateTime($date);
         };
-
         return $this;
     }
 
@@ -165,7 +160,6 @@ abstract class Model implements ModelInterface
             return $value ? new DateTime($value) : null;
         } catch (Exception) {
         }
-
         return null;
     }
 

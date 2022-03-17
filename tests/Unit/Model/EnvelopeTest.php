@@ -4,7 +4,7 @@ namespace Hippy\Tests\Unit\Model;
 
 use Hippy\Error\ErrorCollection;
 use Hippy\Model\Envelope;
-use Hippy\Model\ModelInterface;
+use Hippy\Model\Model;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
@@ -62,7 +62,7 @@ class EnvelopeTest extends TestCase
      */
     public function testSetData(): void
     {
-        $data = $this->createMock(ModelInterface::class);
+        $data = $this->createMock(Model::class);
 
         $envelope = new Envelope();
 

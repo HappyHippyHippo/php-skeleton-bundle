@@ -3,7 +3,6 @@
 namespace Hippy\Tests\Unit\Config\Partial;
 
 use Hippy\Config\Partial\AbstractPartial;
-use Hippy\Config\Partial\PartialInterface;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 use ReflectionMethod;
@@ -29,7 +28,7 @@ class LoadTypeTest extends TestCase
                 parent::__construct($domain);
                 $this->def = ['domain.field' => true];
             }
-            public function load(array $config = []): PartialInterface
+            public function load(array $config = []): AbstractPartial
             {
                 return $this;
             }
@@ -52,7 +51,7 @@ class LoadTypeTest extends TestCase
     {
         $path = 'domain.field';
         $sut = new class ('domain') extends AbstractPartial {
-            public function load(array $config = []): PartialInterface
+            public function load(array $config = []): AbstractPartial
             {
                 return $this;
             }
@@ -75,7 +74,7 @@ class LoadTypeTest extends TestCase
     {
         $path = 'domain.field';
         $sut = new class ('domain') extends AbstractPartial {
-            public function load(array $config = []): PartialInterface
+            public function load(array $config = []): AbstractPartial
             {
                 return $this;
             }
@@ -100,7 +99,7 @@ class LoadTypeTest extends TestCase
     {
         $path = 'domain.field';
         $sut = new class ('domain') extends AbstractPartial {
-            public function load(array $config = []): PartialInterface
+            public function load(array $config = []): AbstractPartial
             {
                 return $this;
             }
@@ -130,7 +129,7 @@ class LoadTypeTest extends TestCase
                 parent::__construct($domain);
                 $this->def = ['domain.field' => 123];
             }
-            public function load(array $config = []): PartialInterface
+            public function load(array $config = []): AbstractPartial
             {
                 return $this;
             }
@@ -154,7 +153,7 @@ class LoadTypeTest extends TestCase
         $value = 123;
         $path = 'domain.field';
         $sut = new class ('domain') extends AbstractPartial {
-            public function load(array $config = []): PartialInterface
+            public function load(array $config = []): AbstractPartial
             {
                 return $this;
             }
@@ -177,7 +176,7 @@ class LoadTypeTest extends TestCase
     {
         $path = 'domain.field';
         $sut = new class ('domain') extends AbstractPartial {
-            public function load(array $config = []): PartialInterface
+            public function load(array $config = []): AbstractPartial
             {
                 return $this;
             }
@@ -203,7 +202,7 @@ class LoadTypeTest extends TestCase
         $value = 123;
         $path = 'domain.field';
         $sut = new class ('domain') extends AbstractPartial {
-            public function load(array $config = []): PartialInterface
+            public function load(array $config = []): AbstractPartial
             {
                 return $this;
             }
@@ -233,7 +232,7 @@ class LoadTypeTest extends TestCase
                 parent::__construct($domain);
                 $this->def = ['domain.field' => '__dummy_value__'];
             }
-            public function load(array $config = []): PartialInterface
+            public function load(array $config = []): AbstractPartial
             {
                 return $this;
             }
@@ -257,7 +256,7 @@ class LoadTypeTest extends TestCase
         $value = '__dummy_value__';
         $path = 'domain.field';
         $sut = new class ('domain') extends AbstractPartial {
-            public function load(array $config = []): PartialInterface
+            public function load(array $config = []): AbstractPartial
             {
                 return $this;
             }
@@ -280,7 +279,7 @@ class LoadTypeTest extends TestCase
     {
         $path = 'domain.field';
         $sut = new class ('domain') extends AbstractPartial {
-            public function load(array $config = []): PartialInterface
+            public function load(array $config = []): AbstractPartial
             {
                 return $this;
             }
@@ -306,7 +305,7 @@ class LoadTypeTest extends TestCase
         $value = '__dummy_value__';
         $path = 'domain.field';
         $sut = new class ('domain') extends AbstractPartial {
-            public function load(array $config = []): PartialInterface
+            public function load(array $config = []): AbstractPartial
             {
                 return $this;
             }
@@ -336,7 +335,7 @@ class LoadTypeTest extends TestCase
                 parent::__construct($domain);
                 $this->def = ['domain.field' => ['__dummy_value__']];
             }
-            public function load(array $config = []): PartialInterface
+            public function load(array $config = []): AbstractPartial
             {
                 return $this;
             }
@@ -360,7 +359,7 @@ class LoadTypeTest extends TestCase
         $value = ['__dummy_value__'];
         $path = 'domain.field';
         $sut = new class ('domain') extends AbstractPartial {
-            public function load(array $config = []): PartialInterface
+            public function load(array $config = []): AbstractPartial
             {
                 return $this;
             }
@@ -383,7 +382,7 @@ class LoadTypeTest extends TestCase
     {
         $path = 'domain.field';
         $sut = new class ('domain') extends AbstractPartial {
-            public function load(array $config = []): PartialInterface
+            public function load(array $config = []): AbstractPartial
             {
                 return $this;
             }
@@ -409,7 +408,7 @@ class LoadTypeTest extends TestCase
         $value = ['__dummy_value__'];
         $path = 'domain.field';
         $sut = new class ('domain') extends AbstractPartial {
-            public function load(array $config = []): PartialInterface
+            public function load(array $config = []): AbstractPartial
             {
                 return $this;
             }

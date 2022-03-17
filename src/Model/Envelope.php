@@ -6,16 +6,16 @@ use Hippy\Error\ErrorCollection;
 
 /**
  * @method EnvelopeStatus getStatus()
- * @method ModelInterface|null getData()
- * @method Envelope setData(ModelInterface|null $data)
+ * @method Model|null getData()
+ * @method Envelope setData(Model|null $data)
  */
 class Envelope extends Model
 {
     /** @var EnvelopeStatus */
     protected EnvelopeStatus $status;
 
-    /** @var ModelInterface|null */
-    protected ?ModelInterface $data = null;
+    /** @var Model|null */
+    protected ?Model $data = null;
 
     /**
      * @param ErrorCollection|null $errors

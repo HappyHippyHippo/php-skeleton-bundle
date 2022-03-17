@@ -4,8 +4,7 @@ namespace Hippy\Tests\Unit\Model;
 
 use ArrayIterator;
 use Hippy\Model\Collection;
-use Hippy\Model\CollectionInterface;
-use Hippy\Model\ModelInterface;
+use Hippy\Model\Model;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
@@ -30,14 +29,13 @@ class CollectionTest extends TestCase
      */
     public function testConstructWithArgument(): void
     {
-        $item1 = $this->createMock(ModelInterface::class);
-        $item2 = $this->createMock(ModelInterface::class);
+        $item1 = $this->createMock(Model::class);
+        $item2 = $this->createMock(Model::class);
 
         $collection = new class ([$item1, $item2]) extends Collection {
-            public function add(ModelInterface $item): CollectionInterface
+            public function add(Model $item): Collection
             {
                 $this->items[] = $item;
-
                 return $this;
             }
         };
@@ -78,7 +76,7 @@ class CollectionTest extends TestCase
      */
     public function testOffsetGet(): void
     {
-        $item = $this->createMock(ModelInterface::class);
+        $item = $this->createMock(Model::class);
 
         $collection = $this->getMockForAbstractClass(Collection::class);
 
@@ -92,7 +90,7 @@ class CollectionTest extends TestCase
      */
     public function testOffsetSet(): void
     {
-        $item = $this->createMock(ModelInterface::class);
+        $item = $this->createMock(Model::class);
 
         $collection = $this->getMockForAbstractClass(Collection::class);
 
@@ -104,7 +102,7 @@ class CollectionTest extends TestCase
      * @return void
      * @covers ::offsetSet
      */
-    public function testOffsetSetThrowsIfNotAModelInterface(): void
+    public function testOffsetSetThrowsIfNotAModel(): void
     {
         $item = '__dummy_value__';
 
@@ -123,7 +121,7 @@ class CollectionTest extends TestCase
      */
     public function testOffsetUnset(): void
     {
-        $item = $this->createMock(ModelInterface::class);
+        $item = $this->createMock(Model::class);
 
         $collection = $this->getMockForAbstractClass(Collection::class);
 
@@ -141,9 +139,9 @@ class CollectionTest extends TestCase
     {
         $collection = $this->getMockForAbstractClass(Collection::class);
 
-        $item1 = $this->createMock(ModelInterface::class);
-        $item2 = $this->createMock(ModelInterface::class);
-        $item3 = $this->createMock(ModelInterface::class);
+        $item1 = $this->createMock(Model::class);
+        $item2 = $this->createMock(Model::class);
+        $item3 = $this->createMock(Model::class);
         $list = [$item1, $item2, $item3];
 
         $this->setItems($collection, $list);
@@ -207,9 +205,9 @@ class CollectionTest extends TestCase
      */
     public function testFindSuccess(): void
     {
-        $value1 = $this->createMock(ModelInterface::class);
-        $value2 = $this->createMock(ModelInterface::class);
-        $value3 = $this->createMock(ModelInterface::class);
+        $value1 = $this->createMock(Model::class);
+        $value2 = $this->createMock(Model::class);
+        $value3 = $this->createMock(Model::class);
 
         $collection = $this->getMockForAbstractClass(Collection::class);
 
@@ -225,9 +223,9 @@ class CollectionTest extends TestCase
      */
     public function testFindFail(): void
     {
-        $value1 = $this->createMock(ModelInterface::class);
-        $value2 = $this->createMock(ModelInterface::class);
-        $value3 = $this->createMock(ModelInterface::class);
+        $value1 = $this->createMock(Model::class);
+        $value2 = $this->createMock(Model::class);
+        $value3 = $this->createMock(Model::class);
 
         $collection = $this->getMockForAbstractClass(Collection::class);
 
@@ -255,11 +253,11 @@ class CollectionTest extends TestCase
     public function testJsonSerialize(): void
     {
         $value1 = ['name' => '__dummy_name_1__', 'value' => '__dummy_value_1__'];
-        $item1 = $this->createMock(ModelInterface::class);
+        $item1 = $this->createMock(Model::class);
         $item1->expects($this->once())->method('jsonSerialize')->willReturn($value1);
 
         $value2 = ['name' => '__dummy_name_2__', 'value' => '__dummy_value_2__'];
-        $item2 = $this->createMock(ModelInterface::class);
+        $item2 = $this->createMock(Model::class);
         $item2->expects($this->once())->method('jsonSerialize')->willReturn($value2);
 
         $collection = $this->getMockForAbstractClass(Collection::class);
@@ -271,12 +269,11 @@ class CollectionTest extends TestCase
     /**
      * @return void
      * @covers ::jsonSerialize
-     * @covers ::setIdentifier
      */
     public function testJsonSerializeWithIdentifier(): void
     {
         $value1 = ['name' => '__dummy_name_1__', 'value' => '__dummy_value_1__'];
-        $item1 = $this->getMockBuilder(ModelInterface::class)
+        $item1 = $this->getMockBuilder(Model::class)
             ->addMethods(['getName'])
             ->onlyMethods(['jsonSerialize'])
             ->getMock();
@@ -284,7 +281,7 @@ class CollectionTest extends TestCase
         $item1->expects($this->once())->method('getName')->willReturn($value1['name']);
 
         $value2 = ['name' => '__dummy_name_2__', 'value' => '__dummy_value_2__'];
-        $item2 = $this->getMockBuilder(ModelInterface::class)
+        $item2 = $this->getMockBuilder(Model::class)
             ->addMethods(['getName'])
             ->onlyMethods(['jsonSerialize'])
             ->getMock();

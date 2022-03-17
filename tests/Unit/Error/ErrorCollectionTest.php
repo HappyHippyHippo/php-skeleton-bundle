@@ -4,8 +4,7 @@ namespace Hippy\Tests\Unit\Error;
 
 use Hippy\Error\Error;
 use Hippy\Error\ErrorCollection;
-use Hippy\Error\ErrorInterface;
-use Hippy\Model\ModelInterface;
+use Hippy\Model\Model;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
@@ -21,7 +20,7 @@ class ErrorCollectionTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        $error = $this->createMock(ModelInterface::class);
+        $error = $this->createMock(Model::class);
 
         $collection = new ErrorCollection();
         $collection->add($error);
@@ -33,7 +32,7 @@ class ErrorCollectionTest extends TestCase
      */
     public function testAdd(): void
     {
-        $error = $this->createMock(ErrorInterface::class);
+        $error = $this->createMock(Error::class);
 
         $collection = new ErrorCollection();
         $collection->add($error);

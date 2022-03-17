@@ -38,6 +38,7 @@ class ErrorTest extends TestCase
 
     /**
      * @return void
+     * @covers ::__construct
      * @covers ::getService
      * @covers ::setService
      */
@@ -53,6 +54,7 @@ class ErrorTest extends TestCase
 
     /**
      * @return void
+     * @covers ::__construct
      * @covers ::getEndpoint
      * @covers ::setEndpoint
      */
@@ -68,6 +70,7 @@ class ErrorTest extends TestCase
 
     /**
      * @return void
+     * @covers ::__construct
      * @covers ::getParam
      * @covers ::setParam
      */
@@ -83,6 +86,7 @@ class ErrorTest extends TestCase
 
     /**
      * @return void
+     * @covers ::__construct
      * @covers ::getCode
      * @covers ::setCode
      */
@@ -98,8 +102,7 @@ class ErrorTest extends TestCase
 
     /**
      * @return void
-     * @covers ::getMessage
-     * @covers ::setMessage
+     * @covers ::__construct
      */
     public function testMessageGetterAndSetter(): void
     {

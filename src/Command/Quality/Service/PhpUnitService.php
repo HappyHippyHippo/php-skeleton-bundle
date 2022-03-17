@@ -4,7 +4,7 @@ namespace Hippy\Command\Quality\Service;
 
 use Hippy\Command\CommandException;
 use Hippy\Command\Quality\Config\PhpUnitServiceConfig;
-use Hippy\Config\ConfigInterface;
+use Hippy\Config\Config;
 use Symfony\Component\Console\Command\Command;
 
 class PhpUnitService extends AbstractService
@@ -13,9 +13,9 @@ class PhpUnitService extends AbstractService
     protected const ALLOWED_FORMATS = ['html', 'text', 'xml'];
 
     /**
-     * @param ConfigInterface $config
+     * @param Config $config
      */
-    public function __construct(protected ConfigInterface $config)
+    public function __construct(protected Config $config)
     {
     }
 

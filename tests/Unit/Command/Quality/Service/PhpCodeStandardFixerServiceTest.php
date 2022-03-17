@@ -5,7 +5,7 @@ namespace Hippy\Tests\Unit\Command\Quality\Service;
 use Hippy\Command\CommandException;
 use Hippy\Command\Quality\Config\PhpCodeStandardFixerServiceConfig;
 use Hippy\Command\Quality\Service\PhpCodeStandardFixerService;
-use Hippy\Config\ConfigInterface;
+use Hippy\Config\Config;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
@@ -18,8 +18,8 @@ class PhpCodeStandardFixerServiceTest extends TestCase
     /** @var string */
     protected const ROOT = '__dummy_root__';
 
-    /** @var ConfigInterface&MockObject */
-    protected ConfigInterface $config;
+    /** @var Config&MockObject */
+    protected Config $config;
 
     /** @var PhpCodeStandardFixerServiceConfig&MockObject */
     protected PhpCodeStandardFixerServiceConfig $phpcsfixerConfig;
@@ -35,7 +35,7 @@ class PhpCodeStandardFixerServiceTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->config = $this->createMock(ConfigInterface::class);
+        $this->config = $this->getMockBuilder(Config::class)->addMethods(['getRoot'])->getMock();
         $this->phpcsfixerConfig = $this->createMock(PhpCodeStandardFixerServiceConfig::class);
         $this->styler = $this->createMock(SymfonyStyle::class);
         $this->sut = $this->getMockBuilder(PhpCodeStandardFixerService::class)

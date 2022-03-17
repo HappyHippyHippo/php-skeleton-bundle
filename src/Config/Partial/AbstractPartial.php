@@ -5,7 +5,10 @@ namespace Hippy\Config\Partial;
 use Hippy\Model\Model;
 use RuntimeException;
 
-abstract class AbstractPartial extends Model implements PartialInterface
+/**
+ * @method string getDomain()
+ */
+abstract class AbstractPartial extends Model
 {
     /** @var string  */
     protected const ENV_PREFIX = 'HIPPY.';
@@ -25,12 +28,10 @@ abstract class AbstractPartial extends Model implements PartialInterface
     }
 
     /**
-     * @return string
+     * @param array<string, mixed> $config
+     * @return $this
      */
-    public function getDomain(): string
-    {
-        return $this->domain;
-    }
+    abstract public function load(array $config = []): self;
 
     /**
      * @param string $path

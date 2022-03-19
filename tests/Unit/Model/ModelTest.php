@@ -5,6 +5,7 @@ namespace Hippy\Tests\Unit\Model;
 use BadMethodCallException;
 use DateTime;
 use Hippy\Model\Model;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use ReflectionException;
 use ReflectionMethod;
@@ -31,6 +32,21 @@ class ModelTest extends TestCase
         };
 
         $this->assertEquals($values['field'], $model->getField());
+    }
+
+    /**
+     * @return void
+     * @covers ::__call
+     */
+    public function testCallIsNull(): void
+    {
+        /** @method bool isField() */
+        $model = new class () extends Model {
+            /** @var bool $field */
+            protected bool $field;
+        };
+
+        $this->assertNull($model->isField()); // @phpstan-ignore-line
     }
 
     /**
@@ -108,6 +124,21 @@ class ModelTest extends TestCase
         };
 
         $this->assertEquals('__dummy_string__', $model->getField()); // @phpstan-ignore-line
+    }
+
+    /**
+     * @return void
+     * @covers ::__call
+     */
+    public function testCallGetReturnNullOnNonInitializedField(): void
+    {
+        /** @method string getField() */
+        $model = new class () extends Model {
+            /** @var string $field */
+            protected string $field;
+        };
+
+        $this->assertNull($model->getField()); // @phpstan-ignore-line
     }
 
     /**
@@ -195,7 +226,7 @@ class ModelTest extends TestCase
             protected string $field = '__dummy_string__';
         };
 
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $model->setField(); // @phpstan-ignore-line
     }
 

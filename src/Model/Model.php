@@ -41,12 +41,12 @@ abstract class Model implements JsonSerializable
         if (str_starts_with($name, 'is')) {
             $field = lcfirst(substr($name, 2));
             if (property_exists($this, $field) && str_contains($type($field), 'bool')) {
-                return $this->$field;
+                return $this->$field ?? null;
             }
         } elseif (str_starts_with($name, 'get')) {
             $field = lcfirst(substr($name, 3));
             if (property_exists($this, $field) && !str_contains($type($field), 'bool')) {
-                return $this->$field;
+                return $this->$field ?? null;
             }
         } elseif (str_starts_with($name, 'set')) {
             $field = lcfirst(substr($name, 3));

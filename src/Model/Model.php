@@ -5,6 +5,7 @@ namespace Hippy\Model;
 use BadMethodCallException;
 use DateTime;
 use Exception;
+use InvalidArgumentException;
 use JsonSerializable;
 use ReflectionException;
 use ReflectionProperty;
@@ -28,31 +29,26 @@ abstract class Model implements JsonSerializable
      * @param string $name
      * @param array<int|string, mixed> $arguments
      * @return mixed
+     * @throws InvalidArgumentException
      * @throws BadMethodCallException
-     * @throws ReflectionException
      */
     public function __call(string $name, array $arguments): mixed
     {
-        $type = function (string $field): string {
-            $prop = new ReflectionProperty($this, $field);
-            return (string) $prop->getType();
-        };
-
         if (str_starts_with($name, 'is')) {
             $field = lcfirst(substr($name, 2));
-            if (property_exists($this, $field) && str_contains($type($field), 'bool')) {
+            if (property_exists($this, $field)) {
                 return $this->$field ?? null;
             }
         } elseif (str_starts_with($name, 'get')) {
             $field = lcfirst(substr($name, 3));
-            if (property_exists($this, $field) && !str_contains($type($field), 'bool')) {
+            if (property_exists($this, $field)) {
                 return $this->$field ?? null;
             }
         } elseif (str_starts_with($name, 'set')) {
             $field = lcfirst(substr($name, 3));
             if (property_exists($this, $field)) {
                 if (!isset($arguments[0])) {
-                    throw new \InvalidArgumentException('missing set argument');
+                    throw new InvalidArgumentException('missing set argument');
                 }
                 $this->$field = $arguments[0];
                 return $this;

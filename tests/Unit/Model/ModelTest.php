@@ -99,22 +99,6 @@ class ModelTest extends TestCase
      * @return void
      * @covers ::__call
      */
-    public function testCallIsThrowIfInvalidType(): void
-    {
-        /** @method string getField() */
-        $model = new class () extends Model {
-            /** @var string $field */
-            protected string $field = '';
-        };
-
-        $this->expectException(BadMethodCallException::class);
-        $model->isField(); // @phpstan-ignore-line
-    }
-
-    /**
-     * @return void
-     * @covers ::__call
-     */
     public function testCallGet(): void
     {
         /** @method string getField() */
@@ -155,22 +139,6 @@ class ModelTest extends TestCase
 
         $this->expectException(BadMethodCallException::class);
         $model->getFields(); // @phpstan-ignore-line
-    }
-
-    /**
-     * @return void
-     * @covers ::__call
-     */
-    public function testCallGetThrowIfInvalidType(): void
-    {
-        /** @method string getField() */
-        $model = new class () extends Model {
-            /** @var bool $field */
-            protected bool $field = true;
-        };
-
-        $this->expectException(BadMethodCallException::class);
-        $model->getField(); // @phpstan-ignore-line
     }
 
     /**

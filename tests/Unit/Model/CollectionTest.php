@@ -4,6 +4,7 @@ namespace Hippy\Tests\Unit\Model;
 
 use ArrayIterator;
 use Hippy\Model\Collection;
+use Hippy\Model\Envelope;
 use Hippy\Model\Model;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
@@ -18,7 +19,7 @@ class CollectionTest extends TestCase
      */
     public function testConstructWithoutArgument(): void
     {
-        $collection = $this->getMockForAbstractClass(Collection::class);
+        $collection = $this->getMockForAbstractClass(Collection::class, [Model::class]);
 
         $this->assertEquals([], $collection->getItems());
     }
@@ -26,19 +27,47 @@ class CollectionTest extends TestCase
     /**
      * @return void
      * @covers ::__construct
+     * @covers ::add
      */
     public function testConstructWithArgument(): void
     {
         $item1 = $this->createMock(Model::class);
         $item2 = $this->createMock(Model::class);
 
-        $collection = new class ([$item1, $item2]) extends Collection {
-            public function add(Model $item): Collection
-            {
-                $this->items[] = $item;
-                return $this;
-            }
-        };
+        $collection = $this->getMockForAbstractClass(Collection::class, [Model::class, [$item1, $item2]]);
+
+        $this->assertEquals([$item1, $item2], $collection->getItems());
+    }
+
+    /**
+     * @return void
+     * @covers ::__construct
+     * @covers ::add
+     */
+    public function testAddThrowsOnInvalidInsertionType(): void
+    {
+        $item = $this->createMock(Model::class);
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(sprintf('invalid %s item type', Envelope::class));
+
+        $this->getMockForAbstractClass(Collection::class, [Envelope::class, [$item]]);
+    }
+
+    /**
+     * @return void
+     * @covers ::__construct
+     * @covers ::add
+     */
+    public function testAdd(): void
+    {
+        $item1 = $this->createMock(Model::class);
+        $item2 = $this->createMock(Model::class);
+
+        $collection = $this->getMockForAbstractClass(Collection::class, [Model::class]);
+
+        $this->assertSame($collection, $collection->add($item1));
+        $this->assertSame($collection, $collection->add($item2));
 
         $this->assertEquals([$item1, $item2], $collection->getItems());
     }
@@ -49,7 +78,7 @@ class CollectionTest extends TestCase
      */
     public function testCount(): void
     {
-        $collection = $this->getMockForAbstractClass(Collection::class);
+        $collection = $this->getMockForAbstractClass(Collection::class, [Model::class]);
 
         $this->assertEquals(0, $collection->count());
 
@@ -63,7 +92,7 @@ class CollectionTest extends TestCase
      */
     public function testOffsetExists(): void
     {
-        $collection = $this->getMockForAbstractClass(Collection::class);
+        $collection = $this->getMockForAbstractClass(Collection::class, [Model::class]);
 
         $this->assertFalse($collection->offsetExists(0));
         $this->setItems($collection, ['__dummy_entry__']);
@@ -78,7 +107,7 @@ class CollectionTest extends TestCase
     {
         $item = $this->createMock(Model::class);
 
-        $collection = $this->getMockForAbstractClass(Collection::class);
+        $collection = $this->getMockForAbstractClass(Collection::class, [Model::class]);
 
         $this->setItems($collection, [$item]);
         $this->assertEquals($item, $collection->offsetGet(0));
@@ -92,7 +121,7 @@ class CollectionTest extends TestCase
     {
         $item = $this->createMock(Model::class);
 
-        $collection = $this->getMockForAbstractClass(Collection::class);
+        $collection = $this->getMockForAbstractClass(Collection::class, [Model::class]);
 
         $collection->offsetSet(0, $item);
         $this->assertEquals($item, $collection->offsetGet(0));
@@ -106,7 +135,7 @@ class CollectionTest extends TestCase
     {
         $item = '__dummy_value__';
 
-        $collection = $this->getMockForAbstractClass(Collection::class);
+        $collection = $this->getMockForAbstractClass(Collection::class, [Model::class]);
 
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('trying to store a non-model value');
@@ -123,7 +152,7 @@ class CollectionTest extends TestCase
     {
         $item = $this->createMock(Model::class);
 
-        $collection = $this->getMockForAbstractClass(Collection::class);
+        $collection = $this->getMockForAbstractClass(Collection::class, [Model::class]);
 
         $collection->offsetSet(0, $item);
         $this->assertTrue($collection->offsetExists(0));
@@ -137,7 +166,7 @@ class CollectionTest extends TestCase
      */
     public function testGetIterator(): void
     {
-        $collection = $this->getMockForAbstractClass(Collection::class);
+        $collection = $this->getMockForAbstractClass(Collection::class, [Model::class]);
 
         $item1 = $this->createMock(Model::class);
         $item2 = $this->createMock(Model::class);
@@ -165,7 +194,7 @@ class CollectionTest extends TestCase
     {
         $value = 1;
         $callCount = 0;
-        $collection = $this->getMockForAbstractClass(Collection::class);
+        $collection = $this->getMockForAbstractClass(Collection::class, [Model::class]);
 
         $this->setItems($collection, [$value]);
         $this->assertSame($collection, $collection->each(function ($value) use (&$callCount) {
@@ -186,7 +215,7 @@ class CollectionTest extends TestCase
         $values = [1, 2, 3, 4];
         $expected = [1 => 2, 3 => 4];
         $callCount = 0;
-        $collection = $this->getMockForAbstractClass(Collection::class);
+        $collection = $this->getMockForAbstractClass(Collection::class, [Model::class]);
 
         $this->setItems($collection, $values);
         $this->assertSame($collection, $collection->filter(function ($value) use (&$callCount) {
@@ -209,7 +238,7 @@ class CollectionTest extends TestCase
         $value2 = $this->createMock(Model::class);
         $value3 = $this->createMock(Model::class);
 
-        $collection = $this->getMockForAbstractClass(Collection::class);
+        $collection = $this->getMockForAbstractClass(Collection::class, [Model::class]);
 
         $this->setItems($collection, [$value1, $value2, $value3]);
         $this->assertSame($value2, $collection->find(function ($value) use ($value2) {
@@ -227,7 +256,7 @@ class CollectionTest extends TestCase
         $value2 = $this->createMock(Model::class);
         $value3 = $this->createMock(Model::class);
 
-        $collection = $this->getMockForAbstractClass(Collection::class);
+        $collection = $this->getMockForAbstractClass(Collection::class, [Model::class]);
 
         $this->setItems($collection, [$value1, $value2, $value3]);
         $this->assertNull($collection->find(function () {
@@ -241,7 +270,7 @@ class CollectionTest extends TestCase
      */
     public function testJsonSerializeEmptyCollection(): void
     {
-        $collection = $this->getMockForAbstractClass(Collection::class);
+        $collection = $this->getMockForAbstractClass(Collection::class, [Model::class]);
 
         $this->assertEquals([], $collection->jsonSerialize());
     }
@@ -260,7 +289,7 @@ class CollectionTest extends TestCase
         $item2 = $this->createMock(Model::class);
         $item2->expects($this->once())->method('jsonSerialize')->willReturn($value2);
 
-        $collection = $this->getMockForAbstractClass(Collection::class);
+        $collection = $this->getMockForAbstractClass(Collection::class, [Model::class]);
 
         $this->setItems($collection, [$item1, $item2]);
         $this->assertEquals([$value1, $value2], $collection->jsonSerialize());
@@ -288,7 +317,7 @@ class CollectionTest extends TestCase
         $item2->expects($this->once())->method('jsonSerialize')->willReturn($value2);
         $item2->expects($this->once())->method('getName')->willReturn($value2['name']);
 
-        $collection = $this->getMockForAbstractClass(Collection::class);
+        $collection = $this->getMockForAbstractClass(Collection::class, [Model::class]);
         $collection->setIdentifier(function ($model): string {
             return $model->getName();
         });

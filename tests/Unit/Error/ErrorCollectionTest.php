@@ -4,8 +4,6 @@ namespace Hippy\Tests\Unit\Error;
 
 use Hippy\Error\Error;
 use Hippy\Error\ErrorCollection;
-use Hippy\Model\Model;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 
@@ -14,42 +12,13 @@ class ErrorCollectionTest extends TestCase
 {
     /**
      * @return void
-     * @covers ::add
+     * @covers ::__construct
      */
-    public function testAddThrowsIfArgumentIsNotErrorInterface(): void
+    public function testConstructor(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-
-        $error = $this->createMock(Model::class);
-
         $collection = new ErrorCollection();
-        $collection->add($error);
-    }
 
-    /**
-     * @return void
-     * @covers ::add
-     */
-    public function testAdd(): void
-    {
-        $error = $this->createMock(Error::class);
-
-        $collection = new ErrorCollection();
-        $collection->add($error);
-        $this->assertEquals([$error], $this->getItems($collection));
-    }
-
-    /**
-     * @param ErrorCollection $collection
-     * @return Error[]
-     */
-    private function getItems(ErrorCollection $collection): array
-    {
-        $prop = new ReflectionProperty(ErrorCollection::class, 'items');
-        $items = $prop->getValue($collection);
-        if (!is_array($items)) {
-            $this->fail("collection items are not an array");
-        }
-        return $items;
+        $prop = new ReflectionProperty(ErrorCollection::class, 'type');
+        $this->assertEquals(Error::class, $prop->getValue($collection));
     }
 }

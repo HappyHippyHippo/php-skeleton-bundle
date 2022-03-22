@@ -3,22 +3,14 @@
 namespace Hippy\Error;
 
 use Hippy\Model\Collection;
-use Hippy\Model\Model;
-use InvalidArgumentException;
 
 class ErrorCollection extends Collection
 {
     /**
-     * @param Model $item
-     * @return $this
-     * @throws InvalidArgumentException
+     * @param Error[] $items
      */
-    public function add(Model $item): self
+    public function __construct(array $items = [])
     {
-        if (!($item instanceof Error)) {
-            throw new InvalidArgumentException('Invalid error instance');
-        }
-        $this->items[] = $item;
-        return $this;
+        parent::__construct(Error::class, $items);
     }
 }

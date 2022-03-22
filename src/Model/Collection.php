@@ -24,11 +24,14 @@ abstract class Collection extends Model implements Countable, IteratorAggregate,
     protected mixed $identifier = null;
 
     /**
+     * @param string $type
      * @param Model[] $items
      * @throws InvalidArgumentException
      */
-    public function __construct(array $items = [])
-    {
+    public function __construct(
+        protected string $type,
+        array $items = []
+    ) {
         parent::__construct();
 
         foreach ($items as $item) {
@@ -39,9 +42,18 @@ abstract class Collection extends Model implements Countable, IteratorAggregate,
 
     /**
      * @param Model $item
-     * @return Collection
+     * @return $this
+     * @throws InvalidArgumentException
      */
-    abstract public function add(Model $item): Collection;
+    public function add(Model $item): self
+    {
+        if (!($item instanceof $this->type)) {
+            throw new InvalidArgumentException(sprintf('invalid %s item type', $this->type));
+        }
+
+        $this->items[] = $item;
+        return $this;
+    }
 
     /**
      * @return int

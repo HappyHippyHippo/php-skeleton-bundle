@@ -52,6 +52,7 @@ class Exception extends HttpException
      */
     public function addErrors(ErrorCollection $errors): self
     {
+        /** @var Error $error */
         foreach ($errors as $error) {
             $this->errors->add($error);
         }

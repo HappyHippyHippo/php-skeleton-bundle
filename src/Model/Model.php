@@ -47,7 +47,7 @@ abstract class Model implements JsonSerializable
         } elseif (str_starts_with($name, 'set')) {
             $field = lcfirst(substr($name, 3));
             if (property_exists($this, $field)) {
-                if (!isset($arguments[0])) {
+                if (count($arguments) == 0) {
                     throw new InvalidArgumentException('missing set argument');
                 }
                 $this->$field = $arguments[0];

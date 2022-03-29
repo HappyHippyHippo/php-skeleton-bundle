@@ -52,7 +52,7 @@ jobs:
       run: bin/console quality:phpstan
 
     - name: Run PHP unit
-        run: bin/console quality:phpunit -f xml --config /phpunit.github.xml
+      run: bin/console quality:phpunit -f xml --config /phpunit.github.xml
 
     - name: Validate test coverage
       run: php phpunit-threshold.php tests-reports/phpunit/index.xml 90

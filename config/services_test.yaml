@@ -1,0 +1,5 @@
+parameters:
+
+services:
+  Hippy\Tests\Functional\Config\Partial\Partial:
+    tags: [hippy.config.partial]
